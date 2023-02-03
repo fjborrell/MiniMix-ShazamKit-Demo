@@ -9,13 +9,29 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ZStack {
+            //Screen background color
+            Color.miniIce
+                .ignoresSafeArea()
+            
+            //W
+            VStack {
+                Text("Welcome! 👋")
+                    .font(.poppins(.regular, size: 20))
+                
+            }
+            .padding()
         }
-        .padding()
+        .onAppear(){
+            for family: String in UIFont.familyNames
+            {
+                print(family)
+                for names: String in UIFont.fontNames(forFamilyName: family)
+                {
+                    print("== \(names)")
+                }
+            }
+        }
     }
 }
 
