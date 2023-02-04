@@ -11,7 +11,7 @@ struct WelcomeView: View {
     var body: some View {
         ZStack {
             //Screen background gradient
-            Color.pastelBackground
+            LinearGradient.pastelBackground
                 .ignoresSafeArea()
             
             VStack {

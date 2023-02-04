@@ -13,5 +13,8 @@ extension Color {
     static let miniSky = Color("miniSky")
     static let miniGrey = Color("miniGrey")
     static let miniBlue = Color("miniBlue")
+}
+
+extension LinearGradient {
     static let pastelBackground = LinearGradient(colors: [.miniIce, .miniSky], startPoint: .top, endPoint: .bottom)
 }

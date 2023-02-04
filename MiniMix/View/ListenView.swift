@@ -21,7 +21,7 @@ struct ListenView: View {
         
         ZStack {
             //Screen background gradient
-            Color.pastelBackground
+            Color.miniSky
                 .ignoresSafeArea()
             
             VStack {
