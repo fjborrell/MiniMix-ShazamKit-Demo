@@ -35,7 +35,7 @@ struct WelcomeView: View {
                 }) {
                     Text("Get Started")
                 }
-                .buttonStyle(.neobrutalism)
+                .buttonStyle(.neobrutalismRect)
                 
             }
             .padding()

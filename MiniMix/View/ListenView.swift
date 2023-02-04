@@ -9,7 +9,37 @@ import SwiftUI
 
 struct ListenView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            //Screen background gradient
+            Color.pastelBackground
+                .ignoresSafeArea()
+            
+            VStack {
+                
+                VStack {
+                    Label("Tap to Identify", systemImage: "mic.fill")
+                        .labelStyle(.trailingIcon)
+                        .font(.poppins(.medium, size: 20))
+                        .padding()
+                    
+                    Button(action: {
+                        
+                    }, label: {
+                        Image("miniMicrophone")
+                    })
+                    .buttonStyle(.neobrutalismCircle)
+                    .padding()
+                }
+                
+                Text("Use music recognition to seamlessly connect to Shazam’s catalog of music")
+                    .font(.poppins(.regular, size: 14))
+                    .multilineTextAlignment(.center)
+                    .frame(width: 300)
+                    .padding(12)
+                
+            }
+            .padding()
+        }
     }
 }
 
