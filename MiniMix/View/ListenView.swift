@@ -9,12 +9,13 @@ import SwiftUI
 import ShazamKit
 
 struct ListenView: View {
+    @State var isListening: Bool = false
     @State var shazamHelper: ShazamKitHelper?
     @State var matchedSong: SHMediaItem?
-    @State var displayingSong: Bool = false
+    @State var isDisplayingSong: Bool = false
     
     var body: some View {
-        if displayingSong {
+        if isDisplayingSong {
             SongView(song: $matchedSong)
         }
         
@@ -26,13 +27,26 @@ struct ListenView: View {
             VStack {
                 
                 VStack {
-                    Label("Tap to Identify", systemImage: "mic.fill")
-                        .labelStyle(.trailingIcon)
-                        .font(.poppins(.medium, size: 20))
-                        .padding()
+                    if isListening {
+                        Label("Listening...", systemImage: "waveform.and.mic")
+                            .labelStyle(.trailingIcon)
+                            .font(.poppins(.medium, size: 20))
+                            .padding()
+                    } else {
+                        Label("Tap to Identify", systemImage: "mic.fill")
+                            .labelStyle(.trailingIcon)
+                            .font(.poppins(.medium, size: 20))
+                            .padding()
+                    }
+                    
                     
                     Button(action: {
-                        
+                        do {
+                            try shazamHelper?.match()
+                        }
+                        catch {
+                            print("DEBUG: Match failed")
+                        }
                     }, label: {
                         Image("miniMicrophone")
                     })
@@ -52,7 +66,16 @@ struct ListenView: View {
         .onAppear {
             if shazamHelper == nil {
                 shazamHelper = ShazamKitHelper(handler: finishedSongMatch)
+                
+                //The built-in microphones on devices running iOS 14 and earlier are already compatible with ShazamKit
+                if #available(iOS 15, *) {
+                    shazamHelper?.configureAudioEngine()
+                }
             }
+        }
+        .onDisappear {
+            //Privacy double-down in case listening didn't stop after song was identified
+            shazamHelper?.stopListening()
         }
     }
     
@@ -64,7 +87,7 @@ struct ListenView: View {
             //handle success match
             print("DEBUG: Successful song match")
             matchedSong = item
-            displayingSong = true
+            isDisplayingSong = true
         }
     }
 }

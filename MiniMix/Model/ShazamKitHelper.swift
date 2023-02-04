@@ -114,13 +114,6 @@ class ShazamKitHelper: NSObject, SHSessionDelegate {
             }
         }
     }
-    
-    /*
-     //The built-in microphones on devices running iOS 14 and earlier are already compatible with ShazamKit
-     if #available(iOS 15, *) {
-     configureAudioEngine()
-     }
-     */
 }
 
 
