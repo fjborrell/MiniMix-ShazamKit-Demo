@@ -1,5 +1,5 @@
 //
-//  SongIdentifier.swift
+//  ShazamKitHelper.swift
 //  MiniMix
 //
 //  Created by Fernando Borrell on 2/4/23.
@@ -9,7 +9,7 @@ import AVFAudio
 import Foundation
 import ShazamKit
 
-class SongIdentifier: NSObject, SHSessionDelegate {
+class ShazamKitHelper: NSObject, SHSessionDelegate {
     private let audioEngine = AVAudioEngine()
     private let mixerNode = AVAudioMixerNode()
     

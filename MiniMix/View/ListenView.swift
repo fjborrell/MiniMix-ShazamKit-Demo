@@ -6,9 +6,18 @@
 //
 
 import SwiftUI
+import ShazamKit
 
 struct ListenView: View {
+    @State var shazamHelper: ShazamKitHelper?
+    @State var matchedSong: SHMediaItem?
+    @State var displayingSong: Bool = false
+    
     var body: some View {
+        if displayingSong {
+            SongView(song: $matchedSong)
+        }
+        
         ZStack {
             //Screen background gradient
             Color.pastelBackground
@@ -39,6 +48,23 @@ struct ListenView: View {
                 
             }
             .padding()
+        }
+        .onAppear {
+            if shazamHelper == nil {
+                shazamHelper = ShazamKitHelper(handler: finishedSongMatch)
+            }
+        }
+    }
+    
+    func finishedSongMatch(item: SHMatchedMediaItem?, error: Error?) {
+        if error != nil {
+            //handle error match
+            print("DEBUG: \(error.debugDescription)")
+        } else {
+            //handle success match
+            print("DEBUG: Successful song match")
+            matchedSong = item
+            displayingSong = true
         }
     }
 }

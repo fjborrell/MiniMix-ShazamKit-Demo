@@ -6,15 +6,34 @@
 //
 
 import SwiftUI
+import ShazamKit
 
 struct SongView: View {
+    @Binding var song: SHMediaItem?
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            //Cover Art
+            AsyncImage(
+                url: song?.artworkURL
+            ) { image in
+                image.resizable()
+            } placeholder: {
+                ProgressView()
+                    .progressViewStyle(.circular)
+            }
+            
+            //Metadeta
+            Text(song?.title ?? "Song Title")
+            Text(song?.artist ?? "Artist")
+            Text(song?.subtitle ?? "Subtitle")
+        }
+        
     }
 }
 
 struct SongView_Previews: PreviewProvider {
     static var previews: some View {
-        SongView()
+        SongView(song: .constant(SHMediaItem(properties: [SHMediaItemProperty("Test Property"): "Test Value"])))
     }
 }

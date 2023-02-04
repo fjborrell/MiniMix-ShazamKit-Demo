@@ -17,7 +17,7 @@
 		75498162298EDC8500603931 /* ListenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75498161298EDC8500603931 /* ListenView.swift */; };
 		75498164298EDF3B00603931 /* ListenButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75498163298EDF3B00603931 /* ListenButtonView.swift */; };
 		75498166298EE3AD00603931 /* SongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75498165298EE3AD00603931 /* SongView.swift */; };
-		75498168298EF98C00603931 /* SongIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75498167298EF98C00603931 /* SongIdentifier.swift */; };
+		75498168298EF98C00603931 /* ShazamKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75498167298EF98C00603931 /* ShazamKitHelper.swift */; };
 		75BF63D8298DA4D200B7C668 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF63D7298DA4D200B7C668 /* Colors.swift */; };
 		75BF63DA298DA90B00B7C668 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF63D9298DA90B00B7C668 /* Styles.swift */; };
 		75BF63DC298DAE3A00B7C668 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF63DB298DAE3A00B7C668 /* Fonts.swift */; };
@@ -63,7 +63,7 @@
 		75498161298EDC8500603931 /* ListenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenView.swift; sourceTree = "<group>"; };
 		75498163298EDF3B00603931 /* ListenButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenButtonView.swift; sourceTree = "<group>"; };
 		75498165298EE3AD00603931 /* SongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongView.swift; sourceTree = "<group>"; };
-		75498167298EF98C00603931 /* SongIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongIdentifier.swift; sourceTree = "<group>"; };
+		75498167298EF98C00603931 /* ShazamKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamKitHelper.swift; sourceTree = "<group>"; };
 		75BF63D7298DA4D200B7C668 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		75BF63D9298DA90B00B7C668 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		75BF63DB298DAE3A00B7C668 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 				75BF63D7298DA4D200B7C668 /* Colors.swift */,
 				75BF63D9298DA90B00B7C668 /* Styles.swift */,
 				75BF63DB298DAE3A00B7C668 /* Fonts.swift */,
-				75498167298EF98C00603931 /* SongIdentifier.swift */,
+				75498167298EF98C00603931 /* ShazamKitHelper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -347,7 +347,7 @@
 				75BF63DC298DAE3A00B7C668 /* Fonts.swift in Sources */,
 				75127C7E298CCA6500F0FA0A /* MiniMixApp.swift in Sources */,
 				75BF63DA298DA90B00B7C668 /* Styles.swift in Sources */,
-				75498168298EF98C00603931 /* SongIdentifier.swift in Sources */,
+				75498168298EF98C00603931 /* ShazamKitHelper.swift in Sources */,
 				75BF63D8298DA4D200B7C668 /* Colors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
