@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		75127C7E298CCA6500F0FA0A /* MiniMixApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75127C7D298CCA6500F0FA0A /* MiniMixApp.swift */; };
-		75127C80298CCA6500F0FA0A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75127C7F298CCA6500F0FA0A /* ContentView.swift */; };
+		75127C80298CCA6500F0FA0A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75127C7F298CCA6500F0FA0A /* WelcomeView.swift */; };
 		75127C82298CCA6600F0FA0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75127C81298CCA6600F0FA0A /* Assets.xcassets */; };
 		75127C85298CCA6600F0FA0A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75127C84298CCA6600F0FA0A /* Preview Assets.xcassets */; };
 		75127C8F298CCA6600F0FA0A /* MiniMixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75127C8E298CCA6600F0FA0A /* MiniMixTests.swift */; };
 		75127C99298CCA6600F0FA0A /* MiniMixUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75127C98298CCA6600F0FA0A /* MiniMixUITests.swift */; };
 		75127C9B298CCA6600F0FA0A /* MiniMixUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75127C9A298CCA6600F0FA0A /* MiniMixUITestsLaunchTests.swift */; };
+		75498162298EDC8500603931 /* ListenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75498161298EDC8500603931 /* ListenView.swift */; };
 		75BF63D8298DA4D200B7C668 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF63D7298DA4D200B7C668 /* Colors.swift */; };
 		75BF63DA298DA90B00B7C668 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF63D9298DA90B00B7C668 /* Styles.swift */; };
 		75BF63DC298DAE3A00B7C668 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF63DB298DAE3A00B7C668 /* Fonts.swift */; };
@@ -48,7 +49,7 @@
 /* Begin PBXFileReference section */
 		75127C7A298CCA6500F0FA0A /* MiniMix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniMix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75127C7D298CCA6500F0FA0A /* MiniMixApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMixApp.swift; sourceTree = "<group>"; };
-		75127C7F298CCA6500F0FA0A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		75127C7F298CCA6500F0FA0A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		75127C81298CCA6600F0FA0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75127C84298CCA6600F0FA0A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		75127C8A298CCA6600F0FA0A /* MiniMixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiniMixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +57,7 @@
 		75127C94298CCA6600F0FA0A /* MiniMixUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiniMixUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75127C98298CCA6600F0FA0A /* MiniMixUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMixUITests.swift; sourceTree = "<group>"; };
 		75127C9A298CCA6600F0FA0A /* MiniMixUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMixUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		75498161298EDC8500603931 /* ListenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenView.swift; sourceTree = "<group>"; };
 		75BF63D7298DA4D200B7C668 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		75BF63D9298DA90B00B7C668 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		75BF63DB298DAE3A00B7C668 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -119,13 +121,12 @@
 		75127C7C298CCA6500F0FA0A /* MiniMix */ = {
 			isa = PBXGroup;
 			children = (
-				75BF63E0298DB83100B7C668 /* Assets */,
+				75127C7D298CCA6500F0FA0A /* MiniMixApp.swift */,
 				75BF63DD298DB0C500B7C668 /* Info.plist */,
 				75BF63D6298DA4B000B7C668 /* Model */,
 				75BF63D3298DA01400B7C668 /* View */,
-				75127C7D298CCA6500F0FA0A /* MiniMixApp.swift */,
-				75127C7F298CCA6500F0FA0A /* ContentView.swift */,
 				75127C81298CCA6600F0FA0A /* Assets.xcassets */,
+				75BF63E0298DB83100B7C668 /* Assets */,
 				75127C83298CCA6600F0FA0A /* Preview Content */,
 			);
 			path = MiniMix;
@@ -159,6 +160,8 @@
 		75BF63D3298DA01400B7C668 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				75498161298EDC8500603931 /* ListenView.swift */,
+				75127C7F298CCA6500F0FA0A /* WelcomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -328,7 +331,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75127C80298CCA6500F0FA0A /* ContentView.swift in Sources */,
+				75127C80298CCA6500F0FA0A /* WelcomeView.swift in Sources */,
+				75498162298EDC8500603931 /* ListenView.swift in Sources */,
 				75BF63DC298DAE3A00B7C668 /* Fonts.swift in Sources */,
 				75127C7E298CCA6500F0FA0A /* MiniMixApp.swift in Sources */,
 				75BF63DA298DA90B00B7C668 /* Styles.swift in Sources */,

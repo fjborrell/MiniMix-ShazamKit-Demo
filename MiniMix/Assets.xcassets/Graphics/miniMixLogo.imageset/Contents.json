@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "MiniMixLogo.png",
+      "filename" : "miniMixLogo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "MiniMixLogo@2x.png",
+      "filename" : "miniMixLogo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "MiniMixLogo@3x.png",
+      "filename" : "miniMixLogo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -11,7 +11,7 @@ import SwiftUI
 struct MiniMixApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            WelcomeView()
         }
     }
 }
