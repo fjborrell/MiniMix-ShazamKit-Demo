@@ -22,7 +22,7 @@ struct WelcomeView: View {
                     Text("Welcome! 👋")
                         .font(.poppins(.semibold, size: 28))
                     
-                    Image("musicAfro")
+                    Image("musicSession")
                         .padding(.bottom, 60)
                         .padding(.top, 20)
                     
