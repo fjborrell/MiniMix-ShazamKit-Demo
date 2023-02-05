@@ -57,7 +57,8 @@ struct ListenView: View {
             }
         }
         .sheet(isPresented: $isShowingSong) {
-            SongView(song: $matchedSong, isShowingSong: $isShowingSong)
+            SongSizingView(song: $matchedSong)
+            //SongView(song: $matchedSong, isShowingSong: $isShowingSong)
         }
         .onAppear {
             if shazamHelper == nil {
