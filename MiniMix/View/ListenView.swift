@@ -9,23 +9,18 @@ import SwiftUI
 import ShazamKit
 
 struct ListenView: View {
-    @State var isListening: Bool = false
     @State var shazamHelper: ShazamKitHelper?
     @State var matchedSong: SHMediaItem?
     @State var isDisplayingSong: Bool = false
+    @State var isListening: Bool = false
     
     var body: some View {
-        if isDisplayingSong {
-            SongView(song: $matchedSong)
-        }
-        
         ZStack {
             //Screen background gradient
-            Color.miniSky
+            Color.pastelBackground
                 .ignoresSafeArea()
             
             VStack {
-                
                 VStack {
                     if isListening {
                         Label("Listening...", systemImage: "waveform.and.mic")
@@ -59,9 +54,7 @@ struct ListenView: View {
                     .multilineTextAlignment(.center)
                     .frame(width: 300)
                     .padding(12)
-                
             }
-            .padding()
         }
         .onAppear {
             if shazamHelper == nil {

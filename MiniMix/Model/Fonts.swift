@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 extension Font {
-    
     enum PoppinsFont {
         case black
         case extrabold

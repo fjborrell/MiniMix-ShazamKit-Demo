@@ -9,9 +9,21 @@ import SwiftUI
 
 @main
 struct MiniMixApp: App {
+    @AppStorage("hasSeenWelcomeScreen")
+    private var hasSeenWelcomeScreen: Bool = false
+    
     var body: some Scene {
         WindowGroup {
-            ListenView()
+            if hasSeenWelcomeScreen {
+                RootView()
+            } else {
+                WelcomeView()
+                    .onDisappear() {
+                        hasSeenWelcomeScreen = true
+                    }
+                
+            }
+            
         }
     }
 }
