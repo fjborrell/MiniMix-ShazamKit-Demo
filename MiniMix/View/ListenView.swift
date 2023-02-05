@@ -11,7 +11,7 @@ import ShazamKit
 struct ListenView: View {
     @State var shazamHelper: ShazamKitHelper?
     @State var matchedSong: SHMediaItem?
-    @State var isDisplayingSong: Bool = false
+    @State var isShowingSong: Bool = false
     @State var isListening: Bool = false
     
     var body: some View {
@@ -56,6 +56,9 @@ struct ListenView: View {
                     .padding(12)
             }
         }
+        .sheet(isPresented: $isShowingSong) {
+            SongView(song: $matchedSong, isShowingSong: $isShowingSong)
+        }
         .onAppear {
             if shazamHelper == nil {
                 shazamHelper = ShazamKitHelper(handler: finishedSongMatch)
@@ -80,7 +83,7 @@ struct ListenView: View {
             //handle success match
             print("DEBUG: Successful song match")
             matchedSong = item
-            isDisplayingSong = true
+            isShowingSong = true
         }
     }
 }

@@ -15,7 +15,6 @@
 		75127C99298CCA6600F0FA0A /* MiniMixUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75127C98298CCA6600F0FA0A /* MiniMixUITests.swift */; };
 		75127C9B298CCA6600F0FA0A /* MiniMixUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75127C9A298CCA6600F0FA0A /* MiniMixUITestsLaunchTests.swift */; };
 		75498162298EDC8500603931 /* ListenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75498161298EDC8500603931 /* ListenView.swift */; };
-		75498164298EDF3B00603931 /* ListenButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75498163298EDF3B00603931 /* ListenButtonView.swift */; };
 		75498166298EE3AD00603931 /* SongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75498165298EE3AD00603931 /* SongView.swift */; };
 		75498168298EF98C00603931 /* ShazamKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75498167298EF98C00603931 /* ShazamKitHelper.swift */; };
 		7549816E298F514200603931 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7549816D298F514200603931 /* HistoryView.swift */; };
@@ -63,7 +62,6 @@
 		75127C98298CCA6600F0FA0A /* MiniMixUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMixUITests.swift; sourceTree = "<group>"; };
 		75127C9A298CCA6600F0FA0A /* MiniMixUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMixUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		75498161298EDC8500603931 /* ListenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenView.swift; sourceTree = "<group>"; };
-		75498163298EDF3B00603931 /* ListenButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenButtonView.swift; sourceTree = "<group>"; };
 		75498165298EE3AD00603931 /* SongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongView.swift; sourceTree = "<group>"; };
 		75498167298EF98C00603931 /* ShazamKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamKitHelper.swift; sourceTree = "<group>"; };
 		7549816D298F514200603931 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
@@ -175,7 +173,6 @@
 				75498161298EDC8500603931 /* ListenView.swift */,
 				75498165298EE3AD00603931 /* SongView.swift */,
 				7549816D298F514200603931 /* HistoryView.swift */,
-				75498163298EDF3B00603931 /* ListenButtonView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -347,7 +344,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				75127C80298CCA6500F0FA0A /* WelcomeView.swift in Sources */,
-				75498164298EDF3B00603931 /* ListenButtonView.swift in Sources */,
 				75498162298EDC8500603931 /* ListenView.swift in Sources */,
 				75498166298EE3AD00603931 /* SongView.swift in Sources */,
 				75BF63DC298DAE3A00B7C668 /* Fonts.swift in Sources */,

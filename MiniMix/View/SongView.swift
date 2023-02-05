@@ -10,9 +10,14 @@ import ShazamKit
 
 struct SongView: View {
     @Binding var song: SHMediaItem?
+    @Binding var isShowingSong: Bool
     
     var body: some View {
         VStack {
+            Button("Back", action: {
+                isShowingSong = false
+            })
+            
             //Cover Art
             AsyncImage(
                 url: song?.artworkURL
@@ -34,6 +39,6 @@ struct SongView: View {
 
 struct SongView_Previews: PreviewProvider {
     static var previews: some View {
-        SongView(song: .constant(SHMediaItem(properties: [SHMediaItemProperty("Test Property"): "Test Value"])))
+        SongView(song: .constant(SHMediaItem(properties: [SHMediaItemProperty("Test Property"): "Test Value"])), isShowingSong: .constant(false))
     }
 }
