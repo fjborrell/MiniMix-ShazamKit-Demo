@@ -13,25 +13,71 @@ struct SongView: View {
     @Binding var isShowingSong: Bool
     
     var body: some View {
-        VStack {
-            Button("Back", action: {
-                isShowingSong = false
-            })
+        ZStack {
+            Color.pastelBackground
+                .ignoresSafeArea()
             
-            //Cover Art
-            AsyncImage(
-                url: song?.artworkURL
-            ) { image in
-                image.resizable()
-            } placeholder: {
-                ProgressView()
-                    .progressViewStyle(.circular)
+            VStack {
+                
+                //Cover Art
+                AsyncImage(
+                    url: song?.artworkURL
+                ) { image in
+                    image.resizable()
+                } placeholder: {
+                    VStack {
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(.miniBlue)
+                                .frame(width: .infinity , height: 400)
+                                .opacity(0.8)
+                            
+                            HStack {
+                                Button(action: {
+                                    isShowingSong = false
+                                    
+                                }, label: {
+                                    Label("Back", systemImage: "arrow.left.circle")
+                                })
+                                .buttonStyle(.neobrutalismRect)
+                                .font(.poppins(.regular, size: 14))
+                                Spacer()
+                            }
+                            .padding()
+                            
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                                .colorInvert()
+                        }
+                    }
+                    .ignoresSafeArea()
+                }
+                
+                //Metadeta
+                Text(song?.title ?? "Song Title")
+                    .font(.poppins(.bold, size: 30))
+                Text(song?.artist ?? "Artist")
+                    .font(.poppins(.medium, size: 20))
+                Text(song?.subtitle ?? "Subtitle")
+                
+                //Apple Music Button
+                Link(destination: (song?.appleMusicURL ?? URL(string: "https://music.apple.com/us/browse"))!, label: {
+                    Label("Apple Music", systemImage: "apple.logo")
+                })
+                .buttonStyle(NeoBrutalismRectButtonStyle(color: .pink))
+                .font(.poppins(.semibold, size: 14))
+                
+                //Shazam Button
+                Link(destination: (song?.webURL ?? URL(string: "https://www.shazam.com"))!, label: {
+                    Label("Shazam", systemImage: "shazam.logo.fill")
+                })
+                .buttonStyle(NeoBrutalismRectButtonStyle(color: .blue))
+                .font(.poppins(.semibold, size: 14))
+                
+                Spacer()
+                
+                
             }
-            
-            //Metadeta
-            Text(song?.title ?? "Song Title")
-            Text(song?.artist ?? "Artist")
-            Text(song?.subtitle ?? "Subtitle")
         }
         
     }

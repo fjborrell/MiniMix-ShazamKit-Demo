@@ -23,31 +23,33 @@ extension LabelStyle where Self == TrailingIconLabelStyle {
 }
 
 struct NeoBrutalismRectButtonStyle: ButtonStyle {
+    let color: Color
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(11)
             .background(
                 Rectangle()
-                    .frame(minWidth: 300)
-                    .foregroundColor(.miniGrey)
+                    .foregroundColor(color)
                     .cornerRadius(3)
                     .shadow(color: .black, radius: 0, x: 6, y: 6)
             )
             .foregroundColor(.white)
-            .font(.poppins(.semibold, size: 20))
             .scaleEffect(configuration.isPressed ? 0.9 : 1)
             .animation(.easeOut(duration: 0.1), value: configuration.isPressed)
     }
 }
 
 struct NeoBrutalismCircleButtonStyle: ButtonStyle {
+    let color: Color
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
             .background(
                 Circle()
                     .frame(width: 170, height: 170)
-                    .foregroundColor(.miniGrey)
+                    .foregroundColor(color)
                     .shadow(color: .black, radius: 0, x: 8, y: 8)
             )
             .scaleEffect(configuration.isPressed ? 0.9 : 1)
@@ -55,10 +57,11 @@ struct NeoBrutalismCircleButtonStyle: ButtonStyle {
     }
 }
 
+//Default grey color
 extension ButtonStyle where Self == NeoBrutalismRectButtonStyle {
-    static var neobrutalismRect: Self { Self() }
+    static var neobrutalismRect: Self { Self(color: .miniGrey) }
 }
 
 extension ButtonStyle where Self == NeoBrutalismCircleButtonStyle {
-    static var neobrutalismCircle: Self { Self() }
+    static var neobrutalismCircle: Self { Self(color: .miniGrey) }
 }

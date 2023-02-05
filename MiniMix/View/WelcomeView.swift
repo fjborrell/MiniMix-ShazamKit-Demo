@@ -36,9 +36,12 @@ struct WelcomeView: View {
                     
                     
                     NavigationLink(destination: RootView(), label: {
-                        Text("Get Started")
+                        Label("Get Started", systemImage: "arrow.right.circle")
+                            .labelStyle(.trailingIcon)
+                        
                     })
                     .buttonStyle(.neobrutalismRect)
+                    .font(.poppins(.semibold, size: 20))
                     
                 }
                 .padding()
