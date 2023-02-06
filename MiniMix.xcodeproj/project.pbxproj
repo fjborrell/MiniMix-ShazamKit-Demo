@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7506D38C2991B0EC0090928E /* SongTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7506D38B2991B0EC0090928E /* SongTileView.swift */; };
 		75127C7E298CCA6500F0FA0A /* MiniMixApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75127C7D298CCA6500F0FA0A /* MiniMixApp.swift */; };
 		75127C80298CCA6500F0FA0A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75127C7F298CCA6500F0FA0A /* WelcomeView.swift */; };
 		75127C82298CCA6600F0FA0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75127C81298CCA6600F0FA0A /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7506D38B2991B0EC0090928E /* SongTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTileView.swift; sourceTree = "<group>"; };
 		75127C7A298CCA6500F0FA0A /* MiniMix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniMix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75127C7D298CCA6500F0FA0A /* MiniMixApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMixApp.swift; sourceTree = "<group>"; };
 		75127C7F298CCA6500F0FA0A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7506D38D2991B0EF0090928E /* History */ = {
+			isa = PBXGroup;
+			children = (
+				7506D38B2991B0EC0090928E /* SongTileView.swift */,
+				7549816D298F514200603931 /* HistoryView.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		75127C71298CCA6500F0FA0A = {
 			isa = PBXGroup;
 			children = (
@@ -186,10 +197,10 @@
 		75BF63D3298DA01400B7C668 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				75127C7F298CCA6500F0FA0A /* WelcomeView.swift */,
 				7549816F298F530400603931 /* RootView.swift */,
+				75127C7F298CCA6500F0FA0A /* WelcomeView.swift */,
 				75498161298EDC8500603931 /* ListenView.swift */,
-				7549816D298F514200603931 /* HistoryView.swift */,
+				7506D38D2991B0EF0090928E /* History */,
 				758FEC4C29902DFD00E288F2 /* StickySongView */,
 			);
 			path = View;
@@ -373,6 +384,7 @@
 				75127C7E298CCA6500F0FA0A /* MiniMixApp.swift in Sources */,
 				75BF63DA298DA90B00B7C668 /* Styles.swift in Sources */,
 				756B9081299194CA0089D066 /* BinarySong.swift in Sources */,
+				7506D38C2991B0EC0090928E /* SongTileView.swift in Sources */,
 				7549816E298F514200603931 /* HistoryView.swift in Sources */,
 				75498168298EF98C00603931 /* ShazamKitHelper.swift in Sources */,
 				75BF63D8298DA4D200B7C668 /* Colors.swift in Sources */,

@@ -84,16 +84,17 @@ struct ListenView: View {
     }
     
     func finishedSongMatch(item: BinarySong?, error: Error?) {
-        if error != nil {
-            //handle error match
-            print("DEBUG: Failed to find a song match -> \(error.debugDescription)")
-        } else {
+        if item != nil {
             //handle success match
             print("DEBUG: Successful song match")
             matchedSong = item
             User.globalUser.addMediaToShazamHistory(item: item)
             isListening = false
             isShowingSong = true
+        } else {
+            //handle error match
+            print("DEBUG: Failed to find a song match -> \(error.debugDescription)")
+            isListening = false
         }
     }
 }

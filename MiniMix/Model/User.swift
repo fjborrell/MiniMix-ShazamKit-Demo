@@ -11,7 +11,7 @@ import ShazamKit
 class User {
     // Private reference to the singleton user
     static let globalUser: User = User()
-    var shazamRequestHistory: [BinarySong]
+    private var shazamRequestHistory: [BinarySong]
     
     // Private constructor to ensure client can't create new Users (singleton)
     private init(shazamRequestHistory: [BinarySong] = []) {
