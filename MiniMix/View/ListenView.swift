@@ -40,10 +40,13 @@ struct ListenView: View {
                     
                     Button(action: {
                         do {
+                            isListening = true
                             try shazamHelper?.match()
                         }
                         catch {
-                            print("DEBUG: Match failed")
+                            print("DEBUG: Failed to start the matching process")
+                            isListening = false
+                            shazamHelper?.stopListening()
                         }
                     }, label: {
                         Image("miniMicrophone")
@@ -96,11 +99,13 @@ struct ListenView: View {
     func finishedSongMatch(item: SHMatchedMediaItem?, error: Error?) {
         if error != nil {
             //handle error match
-            print("DEBUG: \(error.debugDescription)")
+            print("DEBUG: Failed to find a song match -> \(error.debugDescription)")
         } else {
             //handle success match
             print("DEBUG: Successful song match")
+            shazamHelper?.stopListening()
             matchedSong = item
+            User.globalUser.addMediaToShazamHistory(item: item)
             isShowingSong = true
         }
     }
