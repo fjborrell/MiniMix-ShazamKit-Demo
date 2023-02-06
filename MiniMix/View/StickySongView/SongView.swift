@@ -1,5 +1,5 @@
 //
-//  StickySongView.swift
+//  SongView.swift
 //  MiniMix
 //
 //  Created by Fernando Borrell on 2/5/23.
@@ -10,6 +10,10 @@ import ShazamKit
 
 struct SongView: View {
     @Binding var song: SHMediaItem?
+    @Binding var isShowingSong: Bool
+    @State var addedSongToLibrary: Bool = false
+    @Binding var shazamHelper: ShazamKitHelper?
+    @Binding var isAuthorizedForMusicKit: Bool
     
     
     var safeArea: EdgeInsets
@@ -49,10 +53,10 @@ struct SongView: View {
                 
                 VStack {
                     Text("Track Data")
-                        .fontWeight(.heavy)
+                        .font(.poppins(.bold, size: 16))
                     
                     // MARK: Album View
-                    AlbumView()
+                    TrackDataView(shazamKitSong: $song, isAuthorizedForMusicKit: $isAuthorizedForMusicKit)
                 }
                 .padding(.top, 10)
                 .zIndex(0)
@@ -141,22 +145,6 @@ struct SongView: View {
         .frame(height: height + safeArea.top)
     }
     
-    @ViewBuilder
-    func AlbumView() -> some View {
-        VStack(spacing: 25) {
-            ForEach(song?.genres.indices ?? ["Unknown"].indices, id: \.self) { index in
-                HStack(spacing: 25) {
-                    Label(song?.genres[index] ?? "Unknown", systemImage: "music.note")
-                        .font(.poppins(.semibold, size: 12))
-                        .foregroundColor(.white)
-                        .cornerRadius(15)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-            }
-        }
-        .padding(15)
-    }
-    
     // MARK: HeaderView
     @ViewBuilder
     func HeaderView() -> some View {
@@ -168,7 +156,7 @@ struct SongView: View {
             
             HStack(spacing: 15) {
                 Button(action: {
-                    
+                    isShowingSong = false
                 }, label: {
                     Image(systemName: "chevron.left")
                         .foregroundColor(.white)
@@ -177,13 +165,28 @@ struct SongView: View {
                 Spacer(minLength: 0)
                 
                 Button(action: {
+                    if let songToAdd = song {
+                        shazamHelper?.addToShazamLibrary(songs: [songToAdd])
+                        addedSongToLibrary = true
+                    } else {
+                        print("DEBUG: Error adding song to Shazam Library, song was nil")
+                    }
                     
                 }, label: {
-                    Text("FOLLOWING")
-                        .font(.poppins(.semibold, size: 13))
+                    if addedSongToLibrary {
+                        Label("ADDED", systemImage: "checkmark.circle")
+                            .font(.poppins(.semibold, size: 13))
+                            .labelStyle(.trailingIcon)
+                    } else {
+                        Label("ADD", systemImage: "shazam.logo")
+                            .font(.poppins(.semibold, size: 13))
+                            .labelStyle(.trailingIcon)
+                    }
+                    
                 })
                 .buttonStyle(NeoBrutalismRectButtonStyle(color: .green))
                 .opacity(1 + progress)
+                .disabled(addedSongToLibrary)
                 
                 Button(action: {
                     
@@ -208,11 +211,5 @@ struct SongView: View {
             .offset(y: -minY)
         }
         .frame(height: 35)
-    }
-}
-
-struct SongView_Previews: PreviewProvider {
-    static var previews: some View {
-        SongSizingView(song: .constant(SHMediaItem(properties: [SHMediaItemProperty("Test Property"): "Test Value"])))
     }
 }

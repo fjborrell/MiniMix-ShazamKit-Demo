@@ -7,12 +7,15 @@
 
 import SwiftUI
 import ShazamKit
+import MusicKit
 
 struct ListenView: View {
     @State var shazamHelper: ShazamKitHelper?
     @State var matchedSong: SHMediaItem?
     @State var isShowingSong: Bool = false
     @State var isListening: Bool = false
+    @State var isAuthorizedForMusicKit: Bool = false
+    
     
     var body: some View {
         ZStack {
@@ -57,8 +60,7 @@ struct ListenView: View {
             }
         }
         .sheet(isPresented: $isShowingSong) {
-            SongSizingView(song: $matchedSong)
-            //SongView(song: $matchedSong, isShowingSong: $isShowingSong)
+            SongSizingView(song: $matchedSong, isShowingSong: $isShowingSong, shazamHelper: $shazamHelper, isAuthorizedForMusicKit: $isAuthorizedForMusicKit)
         }
         .onAppear {
             if shazamHelper == nil {
@@ -69,10 +71,25 @@ struct ListenView: View {
                     shazamHelper?.configureAudioEngine()
                 }
             }
+            Task {
+                requestMusicAuthorization()
+            }
+            
         }
         .onDisappear {
             //Privacy double-down in case listening didn't stop after song was identified
             shazamHelper?.stopListening()
+        }
+    }
+    
+    func requestMusicAuthorization() {
+        Task {
+            let authorizationStatus = await MusicAuthorization.request()
+            if authorizationStatus == .authorized {
+                isAuthorizedForMusicKit = true
+            } else {
+                // User denied permission.
+            }
         }
     }
     

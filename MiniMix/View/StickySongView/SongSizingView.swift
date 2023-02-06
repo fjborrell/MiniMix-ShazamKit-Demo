@@ -10,20 +10,17 @@ import ShazamKit
 
 struct SongSizingView: View {
     @Binding var song: SHMediaItem?
+    @Binding var isShowingSong: Bool
+    @Binding var shazamHelper: ShazamKitHelper?
+    @Binding var isAuthorizedForMusicKit: Bool
     
     var body: some View {
         GeometryReader {
             let safeArea = $0.safeAreaInsets
             let size = $0.size
-            SongView(song: $song, safeArea: safeArea, size: size)
+            SongView(song: $song, isShowingSong: $isShowingSong, shazamHelper: $shazamHelper, isAuthorizedForMusicKit: $isAuthorizedForMusicKit, safeArea: safeArea, size: size)
                 .ignoresSafeArea(.container, edges: .top)
         }
         .preferredColorScheme(.dark)
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        SongSizingView(song: .constant(SHMediaItem(properties: [SHMediaItemProperty("Test Property"): "Test Value"])))
     }
 }
