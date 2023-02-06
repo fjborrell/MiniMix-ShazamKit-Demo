@@ -15,7 +15,6 @@ struct SongView: View {
     @Binding var shazamHelper: ShazamKitHelper?
     @Binding var isAuthorizedForMusicKit: Bool
     
-    
     var safeArea: EdgeInsets
     var size: CGSize
     
@@ -45,10 +44,10 @@ struct SongView: View {
                         .font(.poppins(.semibold, size: 14))
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .offset(y: minY < 50 ? -(minY - 60) : 0)
+                    .offset(y: minY < 75 ? -(minY - 75) : 0)
                 }
                 .frame(height: 50)
-                .padding(.top, -34)
+                .padding(.top, -4)
                 .zIndex(1)
                 
                 VStack {
@@ -65,13 +64,13 @@ struct SongView: View {
                 HeaderView()
             }
         }
-        .background(.black)
+        .background(Color.black)
         .coordinateSpace(name: "SCROLL")
     }
     
     @ViewBuilder
     func Artwork() -> some View {
-        let height = size.height * 0.45
+        let height = size.height * 0.7
         GeometryReader { proxy in
             let size = proxy.size
             let minY = proxy.frame(in: .named("SCROLL")).minY
@@ -105,7 +104,7 @@ struct SongView: View {
                                     .padding(.top, 8)
                             }
                             .opacity(1 + (progress > 0 ? -progress : progress))
-                            .padding(.bottom, 55)
+                            .padding(.bottom, 15)
                             //Moving with ScrollView
                             .offset(y: minY < 0 ? minY : 0)
                         }
@@ -150,7 +149,7 @@ struct SongView: View {
     func HeaderView() -> some View {
         GeometryReader { proxy in
             let minY = proxy.frame(in: .named("SCROLL")).minY
-            let height = size.height * 0.45
+            let height = size.height * 0.7
             let progress = minY / (height * (minY > 0 ? 0.5 : 0.8))
             let titleProgress = minY / height
             
@@ -187,13 +186,6 @@ struct SongView: View {
                 .buttonStyle(NeoBrutalismRectButtonStyle(color: .green))
                 .opacity(1 + progress)
                 .disabled(addedSongToLibrary)
-                
-                Button(action: {
-                    
-                }, label: {
-                    Image(systemName: "ellipsis")
-                        .foregroundColor(.white)
-                })
             }
             .overlay(content: {
                 Text(song?.title ?? "Song Title")
@@ -205,11 +197,19 @@ struct SongView: View {
             .padding(.top, safeArea.top + 10)
             .padding([.horizontal, .bottom], 15)
             .background(content: {
-                Color.black
+                Color.miniBlue
                     .opacity(-progress > 1 ? 1 : 0)
             })
             .offset(y: -minY)
         }
-        .frame(height: 35)
+        .frame(height: 55)
     }
+}
+
+struct SongView_Previews: PreviewProvider {
+    static var previews: some View {
+        SongView(song: .constant(SHMediaItem(properties: [SHMediaItemProperty("genres"): ["Test Value"]])), isShowingSong: .constant(true), shazamHelper: .constant(ShazamKitHelper(handler: finishedSongMatch(self.init()))), isAuthorizedForMusicKit: .constant(true), safeArea: EdgeInsets(), size: CGSize())
+    }
+    
+    func finishedSongMatch(item: SHMatchedMediaItem?, error: Error?) {}
 }
