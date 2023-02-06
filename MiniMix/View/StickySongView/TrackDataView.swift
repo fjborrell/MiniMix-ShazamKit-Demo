@@ -10,17 +10,14 @@ import ShazamKit
 import MusicKit
 
 struct TrackDataView: View {
-    @Binding var shazamKitSong: SHMediaItem?
-    @State private var musicKitSongResponse: MySongResponse?
-    @State private var musicKitSong: Song?
-    @Binding var isAuthorizedForMusicKit: Bool
+    @Binding var song: BinarySong?
     
     var body: some View {
         VStack(spacing: 25) {
             
             Text("Genres")
                 .font(.poppins(.semibold, size: 14))
-            ForEach(shazamKitSong?.genres ?? ["Music"], id: \.self) { genre in
+            ForEach(song?.shazamKitData.genres ?? ["Music"], id: \.self) { genre in
                 HStack(spacing: 25) {
                     Label(genre.description, systemImage: "music.note")
                         .font(.poppins(.semibold, size: 12))
@@ -33,31 +30,15 @@ struct TrackDataView: View {
             Text("Genres")
                 .font(.poppins(.semibold, size: 14))
             
-            Text(musicKitSong?.albumTitle ?? "Album Title")
-            Text(musicKitSong?.albums?.description ?? "Associated Albums")
-            Text(musicKitSong?.isrc ?? "ISRC")
-            Text(musicKitSong?.duration?.description ?? "Duration")
-            Text(musicKitSong?.releaseDate?.description ?? "Release Date")
+            Text(song?.musicKitData?.albumTitle ?? "Album Title")
+            Text(song?.musicKitData?.albums?.description ?? "Associated Albums")
+            Text(song?.musicKitData?.isrc ?? "ISRC")
+            Text(song?.musicKitData?.duration?.description ?? "Duration")
+            Text(song?.musicKitData?.releaseDate?.description ?? "Release Date")
         }
         .padding(15)
         .onAppear {
-            if isAuthorizedForMusicKit {
-                Task {
-                    musicKitSongResponse = await shazamKitSong?.getMusicKitSong() ?? nil
-                    musicKitSong = (musicKitSongResponse?.data.first)!
-                }
-            }
+            
         }
-    }
-}
-
-struct TrackDataView_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Color.black
-                .ignoresSafeArea()
-            TrackDataView(shazamKitSong: .constant(SHMediaItem(properties: [SHMediaItemProperty("genres"): ["Test Value"]])), isAuthorizedForMusicKit: .constant(true))
-        }
-        
     }
 }

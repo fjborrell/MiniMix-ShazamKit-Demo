@@ -11,16 +11,18 @@ import ShazamKit
 import MusicKit
 
 class ShazamKitHelper: NSObject, SHSessionDelegate {
+    private var musicKitSongResponse: MySongResponse?
     private let audioEngine = AVAudioEngine()
     private let mixerNode = AVAudioMixerNode()
+    private var isAuthorizedForMusicKit: Bool = false
     
     // The closure that will be called in the UI
-    private var matchHandler: ((SHMatchedMediaItem?, Error?) -> Void)?
+    private var matchHandler: ((BinarySong?, Error?) -> Void)?
     
     // The session for the active ShazamKit match request.
     private var session: SHSession? = nil
     
-    init(handler: ((SHMatchedMediaItem?, Error?) -> Void)?) {
+    init(handler: ((BinarySong?, Error?) -> Void)?) {
         self.matchHandler = handler
     }
     
@@ -90,6 +92,17 @@ class ShazamKitHelper: NSObject, SHSessionDelegate {
         }
     }
     
+    func requestMusicAuthorization() {
+        Task {
+            let authorizationStatus = await MusicAuthorization.request()
+            if authorizationStatus == .authorized {
+                isAuthorizedForMusicKit = true
+            } else {
+                // User denied permission.
+            }
+        }
+    }
+    
     func session(_ session: SHSession, didFind match: SHMatch) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {
@@ -97,8 +110,23 @@ class ShazamKitHelper: NSObject, SHSessionDelegate {
             }
             
             if let handler = self.matchHandler {
-                handler(match.mediaItems.first, nil)
-                self.stopListening()
+                let shazamKitData: SHMediaItem = match.mediaItems.first!
+                var musicKitData: Song? = nil
+                
+                
+                // Get Song data from MusicKit
+                if self.isAuthorizedForMusicKit {
+                    Task {
+                        self.musicKitSongResponse = await shazamKitData.getMusicKitSong()
+                        musicKitData = (self.musicKitSongResponse?.data.first)!
+                        
+                        //Create a BinarySong using shazam and apple music track data
+                        let songData = BinarySong(shazamKitData: shazamKitData, musicKitData: musicKitData!)
+                        
+                        handler(songData, nil)
+                        self.stopListening()
+                    }
+                }
             }
         }
     }

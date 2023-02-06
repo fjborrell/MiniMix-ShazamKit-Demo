@@ -6,15 +6,38 @@
 //
 
 import SwiftUI
+import ShazamKit
 
 struct HistoryView: View {
+    @Binding var shazamHelper: ShazamKitHelper?
+    @Binding var songDetailsPresented: Bool
+    @State var selectedSong: BinarySong? = nil
+    
     var body: some View {
-        Text("History of Songs")
-    }
-}
-
-struct HistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryView()
+        ZStack {
+            Color.pastelBackground
+                .ignoresSafeArea()
+            
+            VStack {
+                Text("Shazam Request History")
+                    .font(.poppins(.semibold, size: 25))
+                    .padding([.vertical], 30)
+                    .padding([.horizontal], 50)
+                    .multilineTextAlignment(.center)
+                
+                Spacer()
+                
+                ForEach(User.globalUser.shazamRequestHistory, id: \.id) { song in
+                    Text(song.shazamKitData.title ?? "Unknown")
+                        .onTapGesture {
+                            songDetailsPresented = true
+                            selectedSong = song
+                        }
+                }
+            }
+            .sheet(isPresented: $songDetailsPresented) {
+                SongSizingView(song: $selectedSong, isShowingSong: $songDetailsPresented, shazamHelper: $shazamHelper)
+            }
+        }
     }
 }

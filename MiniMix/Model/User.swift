@@ -8,21 +8,21 @@
 import Foundation
 import ShazamKit
 
-class User: ObservableObject {
+class User {
     // Private reference to the singleton user
     static let globalUser: User = User()
-    @Published var shazamRequestHistory: [SHMediaItem]
+    var shazamRequestHistory: [BinarySong]
     
     // Private constructor to ensure client can't create new Users (singleton)
-    private init(shazamRequestHistory: [SHMediaItem] = []) {
+    private init(shazamRequestHistory: [BinarySong] = []) {
         self.shazamRequestHistory = shazamRequestHistory
     }
     
-    func getShazamRequestHistory() -> [SHMediaItem] {
+    func getShazamRequestHistory() -> [BinarySong] {
         return shazamRequestHistory
     }
     
-    func addMediaToShazamHistory(item: SHMediaItem?) {
+    func addMediaToShazamHistory(item: BinarySong?) {
         guard let item = item else {
             return
         }

@@ -10,11 +10,12 @@ import ShazamKit
 import MusicKit
 
 struct ListenView: View {
-    @State var shazamHelper: ShazamKitHelper?
-    @State var matchedSong: SHMediaItem?
-    @State var isShowingSong: Bool = false
+    @Binding var shazamHelper: ShazamKitHelper?
+    @State var matchedSong: BinarySong?
+    @Binding var isShowingSong: Bool
     @State var isListening: Bool = false
-    @State var isAuthorizedForMusicKit: Bool = false
+    @State private var musicKitSongResponse: MySongResponse?
+    @State var musicKitSong: Song?
     
     
     var body: some View {
@@ -63,21 +64,18 @@ struct ListenView: View {
             }
         }
         .sheet(isPresented: $isShowingSong) {
-            SongSizingView(song: $matchedSong, isShowingSong: $isShowingSong, shazamHelper: $shazamHelper, isAuthorizedForMusicKit: $isAuthorizedForMusicKit)
+            SongSizingView(song: $matchedSong, isShowingSong: $isShowingSong, shazamHelper: $shazamHelper)
         }
         .onAppear {
             if shazamHelper == nil {
                 shazamHelper = ShazamKitHelper(handler: finishedSongMatch)
+                shazamHelper?.requestMusicAuthorization()
                 
                 //The built-in microphones on devices running iOS 14 and earlier are already compatible with ShazamKit
                 if #available(iOS 15, *) {
                     shazamHelper?.configureAudioEngine()
                 }
             }
-            Task {
-                requestMusicAuthorization()
-            }
-            
         }
         .onDisappear {
             //Privacy double-down in case listening didn't stop after song was identified
@@ -85,34 +83,28 @@ struct ListenView: View {
         }
     }
     
-    func requestMusicAuthorization() {
-        Task {
-            let authorizationStatus = await MusicAuthorization.request()
-            if authorizationStatus == .authorized {
-                isAuthorizedForMusicKit = true
-            } else {
-                // User denied permission.
-            }
-        }
-    }
-    
-    func finishedSongMatch(item: SHMatchedMediaItem?, error: Error?) {
+    func finishedSongMatch(item: BinarySong?, error: Error?) {
         if error != nil {
             //handle error match
             print("DEBUG: Failed to find a song match -> \(error.debugDescription)")
         } else {
             //handle success match
             print("DEBUG: Successful song match")
-            shazamHelper?.stopListening()
             matchedSong = item
             User.globalUser.addMediaToShazamHistory(item: item)
+            isListening = false
             isShowingSong = true
         }
     }
 }
 
-struct ListenView_Previews: PreviewProvider {
-    static var previews: some View {
-        ListenView()
-    }
-}
+/*
+ struct ListenView_Previews: PreviewProvider {
+     static var previews: some View {
+         ListenView(shazamHelper: .constant(ShazamKitHelper(handler: finishedSongMatch(self.init()))), isShowingSong: .constant(false), isAuthorizedForMusicKit: .constant(true))
+     }
+     
+     func finishedSongMatch(item: SHMatchedMediaItem?, error: Error?) {}
+ }
+ */
+

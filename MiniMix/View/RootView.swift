@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct RootView: View {
+    @State var isShowingSong: Bool = false
+    @State var shazamHelper: ShazamKitHelper? = nil
+    
     var body: some View {
         TabView() {
-            ListenView()
+            ListenView(shazamHelper: $shazamHelper, isShowingSong: $isShowingSong)
                 .tabItem {
                     Text("Listen")
                     Image(systemName: "waveform.and.mic")
                 }
                 .tag(0)
-            HistoryView()
+            HistoryView(shazamHelper: $shazamHelper, songDetailsPresented: $isShowingSong)
                 .tabItem {
                     Text("History")
                     Image(systemName: "clock.fill")

@@ -7,13 +7,13 @@
 
 import SwiftUI
 import ShazamKit
+import MusicKit
 
 struct SongView: View {
-    @Binding var song: SHMediaItem?
+    @Binding var song: BinarySong?
     @Binding var isShowingSong: Bool
     @State var addedSongToLibrary: Bool = false
     @Binding var shazamHelper: ShazamKitHelper?
-    @Binding var isAuthorizedForMusicKit: Bool
     
     var safeArea: EdgeInsets
     var size: CGSize
@@ -30,14 +30,14 @@ struct SongView: View {
                     
                     HStack(spacing: 20) {
                         //Apple Music Button
-                        Link(destination: (song?.appleMusicURL ?? URL(string: "https://music.apple.com/us/browse"))!, label: {
+                        Link(destination: (song?.shazamKitData.appleMusicURL ?? URL(string: "https://music.apple.com/us/browse"))!, label: {
                             Label("APPLE MUSIC", systemImage: "apple.logo")
                         })
                         .buttonStyle(NeoBrutalismRectButtonStyle(color: .pink))
                         .font(.poppins(.semibold, size: 14))
                         
                         //Shazam Button
-                        Link(destination: (song?.webURL ?? URL(string: "https://www.shazam.com"))!, label: {
+                        Link(destination: (song?.shazamKitData.webURL ?? URL(string: "https://www.shazam.com"))!, label: {
                             Label("SHAZAM", systemImage: "shazam.logo.fill")
                         })
                         .buttonStyle(NeoBrutalismRectButtonStyle(color: .blue))
@@ -55,7 +55,7 @@ struct SongView: View {
                         .font(.poppins(.bold, size: 16))
                     
                     // MARK: Album View
-                    TrackDataView(shazamKitSong: $song, isAuthorizedForMusicKit: $isAuthorizedForMusicKit)
+                    TrackDataView(song: $song)
                 }
                 .padding(.top, 10)
                 .zIndex(0)
@@ -78,7 +78,7 @@ struct SongView: View {
             
             //Cover Art
             AsyncImage(
-                url: song?.artworkURL
+                url: song?.shazamKitData.artworkURL
             ) { image in
                 image
                     .resizable()
@@ -94,11 +94,11 @@ struct SongView: View {
                                 )
                             
                             VStack(spacing: 0) {
-                                Text(song?.title ?? "Song Title")
+                                Text(song?.shazamKitData.title ?? "Song Title")
                                     .font(.poppins(.bold, size: 35))
                                     .multilineTextAlignment(.center)
                                 
-                                Text(song?.artist ?? "Artist")
+                                Text(song?.shazamKitData.artist ?? "Artist")
                                     .font(.poppins(.bold, size: 20))
                                     .foregroundColor(.gray)
                                     .padding(.top, 8)
@@ -123,11 +123,11 @@ struct SongView: View {
                                 )
                             
                             VStack(spacing: 0) {
-                                Text(song?.title ?? "Song Title")
+                                Text(song?.shazamKitData.title ?? "Song Title")
                                     .font(.poppins(.bold, size: 35))
                                     .multilineTextAlignment(.center)
                                 
-                                Text(song?.artist ?? "Artist")
+                                Text(song?.shazamKitData.artist ?? "Artist")
                                     .font(.poppins(.bold, size: 20))
                                     .foregroundColor(.gray)
                                     .padding(.top, 8)
@@ -165,7 +165,7 @@ struct SongView: View {
                 
                 Button(action: {
                     if let songToAdd = song {
-                        shazamHelper?.addToShazamLibrary(songs: [songToAdd])
+                        shazamHelper?.addToShazamLibrary(songs: [songToAdd.shazamKitData])
                         addedSongToLibrary = true
                     } else {
                         print("DEBUG: Error adding song to Shazam Library, song was nil")
@@ -188,7 +188,7 @@ struct SongView: View {
                 .disabled(addedSongToLibrary)
             }
             .overlay(content: {
-                Text(song?.title ?? "Song Title")
+                Text(song?.shazamKitData.title ?? "Song Title")
                     .font(.poppins(.semibold, size: 15))
                     .offset(y: -titleProgress > 0.75 ? 0 : 45)
                     .clipped()
@@ -204,12 +204,4 @@ struct SongView: View {
         }
         .frame(height: 55)
     }
-}
-
-struct SongView_Previews: PreviewProvider {
-    static var previews: some View {
-        SongView(song: .constant(SHMediaItem(properties: [SHMediaItemProperty("genres"): ["Test Value"]])), isShowingSong: .constant(true), shazamHelper: .constant(ShazamKitHelper(handler: finishedSongMatch(self.init()))), isAuthorizedForMusicKit: .constant(true), safeArea: EdgeInsets(), size: CGSize())
-    }
-    
-    func finishedSongMatch(item: SHMatchedMediaItem?, error: Error?) {}
 }
