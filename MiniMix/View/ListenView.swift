@@ -14,10 +14,8 @@ struct ListenView: View {
     @State var matchedSong: BinarySong?
     @Binding var isShowingSong: Bool
     @State var isListening: Bool = false
-    @State private var musicKitSongResponse: MySongResponse?
-    @State var musicKitSong: Song?
     @State var showingFailedMatchAlert: Bool = false
-    
+    @State var isSoundWavesAnimated: Bool = false
     
     var body: some View {
         ZStack {
@@ -35,7 +33,8 @@ struct ListenView: View {
                     } else {
                         Label("Tap to Identify", systemImage: "mic.fill")
                             .labelStyle(.trailingIcon)
-                            .font(.poppins(.medium, size: 20))
+                            .foregroundColor(.white)
+                            .font(.poppins(.semibold, size: 20))
                             .padding()
                     }
                     
@@ -43,11 +42,13 @@ struct ListenView: View {
                     Button(action: {
                         do {
                             isListening = true
+                            isSoundWavesAnimated = true
                             try shazamHelper?.match()
                         }
                         catch {
                             print("DEBUG: Failed to start the matching process")
                             isListening = false
+                            isSoundWavesAnimated = false
                             shazamHelper?.stopListening()
                         }
                     }, label: {
@@ -57,11 +58,18 @@ struct ListenView: View {
                     .padding()
                 }
                 
-                Text("Use music recognition to seamlessly connect to Shazam’s catalog of music")
-                    .font(.poppins(.regular, size: 14))
+                SoundWaveView(isSoundWavesAnimated: $isSoundWavesAnimated)
+                    .padding(50)
+                
+                Text("Powered by ShazamKit")
+                    .font(.poppins(.italic, size: 16))
+                    .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .frame(width: 300)
                     .padding(12)
+                
+                
+                
             }
         }
         .sheet(isPresented: $isShowingSong) {
@@ -94,11 +102,13 @@ struct ListenView: View {
             matchedSong = item
             User.globalUser.addMediaToShazamHistory(item: item)
             isListening = false
+            isSoundWavesAnimated = false
             isShowingSong = true
         } else {
             //handle error match
             print("DEBUG: Failed to find a song match -> \(error.debugDescription)")
             isListening = false
+            isSoundWavesAnimated = false
             showingFailedMatchAlert = true
         }
     }

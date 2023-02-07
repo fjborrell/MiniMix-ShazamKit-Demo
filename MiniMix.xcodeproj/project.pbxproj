@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7506D38C2991B0EC0090928E /* SongTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7506D38B2991B0EC0090928E /* SongTileView.swift */; };
+		7506D38F2991D6C30090928E /* SoundWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7506D38E2991D6C30090928E /* SoundWaveView.swift */; };
 		75127C7E298CCA6500F0FA0A /* MiniMixApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75127C7D298CCA6500F0FA0A /* MiniMixApp.swift */; };
 		75127C80298CCA6500F0FA0A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75127C7F298CCA6500F0FA0A /* WelcomeView.swift */; };
 		75127C82298CCA6600F0FA0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75127C81298CCA6600F0FA0A /* Assets.xcassets */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		7506D38B2991B0EC0090928E /* SongTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTileView.swift; sourceTree = "<group>"; };
+		7506D38E2991D6C30090928E /* SoundWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundWaveView.swift; sourceTree = "<group>"; };
 		75127C7A298CCA6500F0FA0A /* MiniMix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniMix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75127C7D298CCA6500F0FA0A /* MiniMixApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMixApp.swift; sourceTree = "<group>"; };
 		75127C7F298CCA6500F0FA0A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				75498161298EDC8500603931 /* ListenView.swift */,
 				7506D38D2991B0EF0090928E /* History */,
 				758FEC4C29902DFD00E288F2 /* StickySongView */,
+				7506D38E2991D6C30090928E /* SoundWaveView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				75127C80298CCA6500F0FA0A /* WelcomeView.swift in Sources */,
 				758FEC5029905BA500E288F2 /* SongSizingView.swift in Sources */,
 				75498162298EDC8500603931 /* ListenView.swift in Sources */,
+				7506D38F2991D6C30090928E /* SoundWaveView.swift in Sources */,
 				75BF63DC298DAE3A00B7C668 /* Fonts.swift in Sources */,
 				758FEC4929902CCD00E288F2 /* SongView.swift in Sources */,
 				75127C7E298CCA6500F0FA0A /* MiniMixApp.swift in Sources */,

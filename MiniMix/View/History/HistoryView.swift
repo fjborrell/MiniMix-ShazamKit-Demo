@@ -24,6 +24,7 @@ struct HistoryView: View {
             VStack {
                 Text("Shazam Request History")
                     .font(.poppins(.semibold, size: 25))
+                    .foregroundColor(.white)
                     .padding([.vertical], 30)
                     .padding([.horizontal], 50)
                     .multilineTextAlignment(.center)

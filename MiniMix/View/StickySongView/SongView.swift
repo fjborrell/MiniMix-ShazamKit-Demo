@@ -31,17 +31,17 @@ struct SongView: View {
                     HStack(spacing: 20) {
                         //Apple Music Button
                         Link(destination: (song?.shazamKitData.appleMusicURL ?? URL(string: "https://music.apple.com/us/browse"))!, label: {
-                            Label("APPLE MUSIC", systemImage: "apple.logo")
+                            Label("MUSIC", systemImage: "apple.logo")
                         })
                         .buttonStyle(NeoBrutalismRectButtonStyle(color: .pink))
-                        .font(.poppins(.semibold, size: 14))
+                        .font(.poppins(.semibold, size: 16))
                         
                         //Shazam Button
                         Link(destination: (song?.shazamKitData.webURL ?? URL(string: "https://www.shazam.com"))!, label: {
                             Label("SHAZAM", systemImage: "shazam.logo.fill")
                         })
                         .buttonStyle(NeoBrutalismRectButtonStyle(color: .blue))
-                        .font(.poppins(.semibold, size: 14))
+                        .font(.poppins(.semibold, size: 16))
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .offset(y: minY < 75 ? -(minY - 75) : 0)
