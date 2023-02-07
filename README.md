@@ -8,7 +8,7 @@ MiniMix is a song-identification iOS application. It listens to your surrounding
 
 This MVP/prototype was developed in ~4 days, and leverages Apple’s ShazamKit and MusicKit (+ Apple Music API) frameworks. 
 
-* The main driver of the application is the ShazamKitHelper class. Here, SHSession is initialized, which handles communicating captured audio signatures with the Shazam servers. The helper also handles microphone audio capture, audio configuration, and session events such (e.g successful and failed matches). 
+* The main driver of the application is the ShazamKitHelper class. Here, SHSession is initialized, which handles communicating captured audio signatures with the Shazam servers. The helper also handles microphone audio capture, audio configuration, and session events (e.g successful and failed matches). 
 
 * Song data returned from the helper class is stored in a custom BinarySong data type -> Consolidates SHMediaItem and Song (MusicKit) data into one. This is used to display detailed track information.
 
