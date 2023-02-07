@@ -8,16 +8,14 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @AppStorage("hasSeenWelcomeScreen")
-    var hasSeenWelcomeScreen: Bool = true
-    
     var body: some View {
         NavigationStack {
             ZStack {
-                //Screen background gradient
+                // MARK: SCREEN BACKGROUND GRADIENT
                 Color.pastelBackground
                     .ignoresSafeArea()
                 
+                // MARK: WELCOME PAGE ASSETS
                 VStack {
                     Text("Welcome! 👋")
                         .font(.poppins(.semibold, size: 28))
@@ -34,15 +32,13 @@ struct WelcomeView: View {
                         .frame(width: 300)
                         .padding(12)
                     
-                    
+                    // Navigates to RootView (TabView -> ListenView)
                     NavigationLink(destination: RootView(), label: {
                         Label("Get Started", systemImage: "arrow.right.circle")
                             .labelStyle(.trailingIcon)
-                        
                     })
                     .buttonStyle(.neobrutalismRect)
                     .font(.poppins(.semibold, size: 20))
-                    
                 }
                 .padding()
             }

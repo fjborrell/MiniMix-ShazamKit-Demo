@@ -10,14 +10,15 @@ import ShazamKit
 import MusicKit
 
 struct SongView: View {
-    @State var addedSongToLibrary: Bool = false
-    
+    // Data Variables
     @Binding var song: BinarySong?
-    @Binding var isShowingSong: Bool
     @Binding var shazamHelper: ShazamKitHelper?
-    
     var safeArea: EdgeInsets
     var size: CGSize
+    
+    // UI State Variables
+    @State var addedSongToLibrary: Bool = false
+    @Binding var isShowingSong: Bool
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {

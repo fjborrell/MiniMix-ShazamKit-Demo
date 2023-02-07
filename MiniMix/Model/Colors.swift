@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+// Defines custom colors used within the app (enables access via dot notation)
 extension Color {
     static let miniIce = Color("miniIce")
     static let miniSky = Color("miniSky")

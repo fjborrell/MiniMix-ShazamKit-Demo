@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 extension TimeInterval {
     // Return a TimeInterval formatted as a "00:00" String
     func stringFormatted() -> String {

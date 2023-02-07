@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+// Defines a custom label style where the icon is to the right of the text
 struct TrailingIconLabelStyle: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         HStack {
@@ -17,11 +18,15 @@ struct TrailingIconLabelStyle: LabelStyle {
     }
 }
 
-// Allows the label style to be called with dot notation
+// Allows the TrailingIconLabeltyle to be accessed with dot notation
 extension LabelStyle where Self == TrailingIconLabelStyle {
     static var trailingIcon: Self { Self() }
 }
 
+
+// TODO: Combine the custom NeoBrutalist button styles into one -> unnecessary code duplication, but need to figure out how to make the shape user-defined (e.g. Rectangle(), Circle(), RoundedRectagnle(), etc.)
+
+// Defines a custom SQUARE button style with a harsh sharp shadow and a subtle scale effect
 struct NeoBrutalismRectButtonStyle: ButtonStyle {
     let color: Color
     
@@ -40,6 +45,7 @@ struct NeoBrutalismRectButtonStyle: ButtonStyle {
     }
 }
 
+// Defines a custom CIRCULAR button style with a harsh sharp shadow and a subtle scale effect
 struct NeoBrutalismCircleButtonStyle: ButtonStyle {
     let color: Color
     
@@ -57,11 +63,12 @@ struct NeoBrutalismCircleButtonStyle: ButtonStyle {
     }
 }
 
-//Default grey color
+// Allows the NeoBrutalismRectButtonStyle to be accessed with dot notation
 extension ButtonStyle where Self == NeoBrutalismRectButtonStyle {
     static var neobrutalismRect: Self { Self(color: .miniGrey) }
 }
 
+// Allows the NeoBrutalismCircleButtonStyle to be accessed with dot notation
 extension ButtonStyle where Self == NeoBrutalismCircleButtonStyle {
     static var neobrutalismCircle: Self { Self(color: .miniGrey) }
 }

@@ -10,14 +10,18 @@ import MusicKit
 import ShazamKit
 
 struct SongTileView: View {
+    
     var song: BinarySong?
     
     var body: some View {
         ZStack {
+            
+            // MARK: SONG COVER ART
             VStack() {
                 AsyncImage(url: song?.shazamKitData.artworkURL) { image in
                     image.resizable()
                 } placeholder: {
+                    // Show loading view while waiting for artwork
                     ProgressView()
                         .progressViewStyle(.circular)
                         .colorInvert()
@@ -28,6 +32,7 @@ struct SongTileView: View {
             .cornerRadius(3)
             .shadow(color: .black, radius: 0, x: 6, y: 6)
             
+            // MARK: SONG TITLE
             HStack {
                 Text(song?.shazamKitData.title ?? "Song Title")
                     .font(.poppins(.medium, size: 12))

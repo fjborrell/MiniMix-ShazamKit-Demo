@@ -15,6 +15,7 @@ struct TrackDataView: View {
     var body: some View {
         VStack(spacing: 25) {
             
+            // MARK: INFO INDICATOR
             VStack {
                 Text("Track Information")
                     .font(.poppins(.bold, size: 20))
@@ -44,11 +45,7 @@ struct TrackDataView: View {
             
             // MARK: EXTRA TRACK INFORMATION
             MiscDataView(song: $song)
-            
         }
         .padding(15)
-        .onAppear {
-            
-        }
     }
 }

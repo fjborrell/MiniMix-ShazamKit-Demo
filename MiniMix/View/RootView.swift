@@ -8,17 +8,25 @@
 import SwiftUI
 
 struct RootView: View {
+    // Watches a key in UserDefaults: Has user already launched the app before
+    @AppStorage("hasSeenWelcomeScreen")
+    private var hasSeenWelcomeScreen: Bool = false
+    
     @State var isShowingSong: Bool = false
     @State var shazamHelper: ShazamKitHelper? = nil
     
     var body: some View {
         TabView() {
+            
+            // MARK: "HOME PAGE" -> LISTEN BUTTON
             ListenView(shazamHelper: $shazamHelper, isShowingSong: $isShowingSong)
                 .tabItem {
                     Text("Listen")
                     Image(systemName: "waveform.and.mic")
                 }
                 .tag(0)
+            
+            // MARK: USER SHAZAM REQUEST HISTORY
             HistoryView(shazamHelper: $shazamHelper)
                 .tabItem {
                     Text("History")
@@ -28,6 +36,10 @@ struct RootView: View {
         }
         .tint(.miniBlue)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            // Store in user defaults, WelcomeView will not be shown again
+            hasSeenWelcomeScreen = true
+        }
     }
 }
 

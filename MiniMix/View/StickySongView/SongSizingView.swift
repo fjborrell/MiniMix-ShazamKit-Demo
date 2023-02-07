@@ -10,9 +10,12 @@ import ShazamKit
 import MusicKit
 
 struct SongSizingView: View {
+    // Data Variables
     @Binding var song: BinarySong?
-    @Binding var isShowingSong: Bool
     @Binding var shazamHelper: ShazamKitHelper?
+    
+    // UI State Variables
+    @Binding var isShowingSong: Bool
     
     var body: some View {
         GeometryReader {

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+// Defines a custom enumeration for the "Poppins-Font" within Font().
 extension Font {
     enum PoppinsFont {
         case black
@@ -21,6 +22,7 @@ extension Font {
         case thin
         case italic
             
+        // Converts the font value from enum to String for usage within Font()
         var value: String {
             switch self {
             case .black:
@@ -47,6 +49,7 @@ extension Font {
         }
     }
     
+    // Enables the Poppins-Font to be called accessed with dot notation (e.g. .font(.poppins(.bold, 12)))
     static func poppins(_ type: PoppinsFont, size: CGFloat) -> Font {
         return .custom(type.value, size: size)
     }

@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct MiniMixApp: App {
+    // Watches a key in UserDefaults: Has user already launched the app before
     @AppStorage("hasSeenWelcomeScreen")
     private var hasSeenWelcomeScreen: Bool = false
     
@@ -18,10 +19,6 @@ struct MiniMixApp: App {
                 RootView()
             } else {
                 WelcomeView()
-                    .onDisappear() {
-                        hasSeenWelcomeScreen = true
-                    }
-                
             }
             
         }

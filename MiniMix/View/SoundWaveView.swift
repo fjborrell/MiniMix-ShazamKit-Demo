@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct SoundWaveView: View {
-    @Binding var isSoundWavesAnimated: Bool
+    // Set's frame height
     let targetHeight: CGFloat = 70
     
+    // UI State Variables
+    @Binding var isSoundWavesAnimated: Bool
+    
+    // MARK: WAVE SLICE GENERATOR
     @ViewBuilder
     func waveSlice(start: Double, end: Double, stiffness: Double) -> some View {
         RoundedRectangle(cornerRadius: 20)
             .frame(width: 10, height: isSoundWavesAnimated ? end : start)
             .foregroundColor(.miniBlue)
+        // When not listening, damping is set to .infinity
             .animation(.interpolatingSpring(stiffness: stiffness, damping: isSoundWavesAnimated ? 0 : .infinity), value: isSoundWavesAnimated)
     }
     
@@ -32,8 +37,8 @@ struct SoundWaveView: View {
     }
 }
 
-//struct SoundWaveView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SoundWaveView(isSoundWavesAnimated: .constant(false))
-//    }
-//}
+struct SoundWaveView_Previews: PreviewProvider {
+    static var previews: some View {
+        SoundWaveView(isSoundWavesAnimated: .constant(false))
+    }
+}
