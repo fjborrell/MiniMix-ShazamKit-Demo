@@ -45,3 +45,17 @@ Inspiration, tutorials, attributions, references, etc.
 * No data persistence for song request history.
 * Need to add optional cancel button to stop song matching once started.
 * Future features I wish to add: Share button, song suggestions, scrollable "mini mixes".
+
+## QA Testing Results:
+1. Welcome Screen -> Leave App (success)
+2. Welcome Screen -> Listen View (success)
+3. Match Success w/ Shazam Data (success)
+4. Match Success w/ and w/o Apple Music Data (success)
+5. Match Fail in silence (success)
+6. Match Fail with unknown song (success)
+7. Start Listening -> History (success)
+8. Start Listening -> History -> ListenView (success)
+9. Start Listening -> Leave App (success)
+10. Start Listening -> Leave App -> History (success)
+11. Start Listening -> History -> Detailed Song View -> History (FAIL)
+* **REPRODUCIBLE BUG; Test 11**: Identifies correct song and adds to history, but breaks ListenView's detailed track sheet. Requires app restart)
