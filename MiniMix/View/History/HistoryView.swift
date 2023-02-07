@@ -8,11 +8,13 @@
 import SwiftUI
 import ShazamKit
 
-struct HistoryView: View {
-    @Binding var shazamHelper: ShazamKitHelper?
-    @Binding var songDetailsPresented: Bool
+struct HistoryView: View {    
     @State var selectedSong: BinarySong? = nil
-    @ObservedObject var user = User.globalUser
+    
+    @Binding var shazamHelper: ShazamKitHelper?
+    @State var songDetailsPresented: Bool = false
+    
+    @ObservedObject var userData = User.globalUser
     
     var tiles: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
     
@@ -32,7 +34,7 @@ struct HistoryView: View {
                 Spacer()
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: tiles, spacing: 20) {
-                        ForEach(user.getShazamRequestHistory().reversed(), id: \.id) { song in
+                        ForEach(userData.getShazamRequestHistory().reversed(), id: \.id) { song in
                             SongTileView(song: song)
                                 .onTapGesture {
                                     selectedSong = song

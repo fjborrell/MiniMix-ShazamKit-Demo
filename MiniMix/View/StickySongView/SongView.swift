@@ -50,15 +50,10 @@ struct SongView: View {
                 .padding(.top, -4)
                 .zIndex(1)
                 
-                VStack {
-                    Text("Track Data")
-                        .font(.poppins(.bold, size: 16))
-                    
-                    // MARK: Album View
-                    TrackDataView(song: $song)
-                }
-                .padding(.top, 10)
-                .zIndex(0)
+                // MARK: Track Information View
+                TrackDataView(song: $song)
+                    .padding(.top, 10)
+                    .zIndex(0)
             }
             .overlay(alignment: .top) {
                 HeaderView()

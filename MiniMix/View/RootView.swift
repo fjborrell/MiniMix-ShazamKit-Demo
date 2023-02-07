@@ -19,7 +19,7 @@ struct RootView: View {
                     Image(systemName: "waveform.and.mic")
                 }
                 .tag(0)
-            HistoryView(shazamHelper: $shazamHelper, songDetailsPresented: $isShowingSong)
+            HistoryView(shazamHelper: $shazamHelper)
                 .tabItem {
                     Text("History")
                     Image(systemName: "clock.fill")

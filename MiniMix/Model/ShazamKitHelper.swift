@@ -121,7 +121,7 @@ class ShazamKitHelper: NSObject, SHSessionDelegate {
                         musicKitData = (self.musicKitSongResponse?.data.first)!
                         
                         //Create a BinarySong using shazam and apple music track data
-                        let songData = BinarySong(shazamKitData: shazamKitData, musicKitData: musicKitData!)
+                        let songData = BinarySong(shazamKitData: shazamKitData, musicKitData: musicKitData)
                         
                         handler(songData, nil)
                         self.stopListening()
@@ -163,7 +163,10 @@ extension SHMediaItem {
     func getMusicKitSong() async -> MySongResponse {
         do {
             let countryCode = try await MusicDataRequest.currentCountryCode
-            let songID = self.appleMusicID!
+            guard let songID = self.appleMusicID else {
+                print("DEBUG: Apple Music API Request Failed (\"Get a Catalog Song\")")
+                return MySongResponse(data: [nil])
+            }
             let url = URL(string: "https://api.music.apple.com/v1/catalog/\(countryCode)/songs/\(songID)")!
 
             let dataRequest = MusicDataRequest(urlRequest: URLRequest(url: url))
@@ -178,75 +181,3 @@ extension SHMediaItem {
         }
     }
 }
-
-// Add MusicKit Song object's properties as SHMediaItemProperties
-//extension SHMediaItemProperty {
-//    //The title of the album the song appears on.
-//    static let albumTitle = SHMediaItemProperty("Album Title")
-//
-//    //The song’s associated albums.
-//    static let albums = SHMediaItemProperty("Albums")
-//
-//    //The artist’s URL.
-//    static let artistURL  = SHMediaItemProperty("Artist URL")
-//
-//    //The duration of the song.
-//    static let duration = SHMediaItemProperty("Duration")
-//
-//    //The names of the song’s associated genres.
-//    static let genreNames = SHMediaItemProperty("Genre Names")
-//
-//    //The song’s associated genres.
-//    static let genres = SHMediaItemProperty("Genres")
-//
-//    //The release date (or expected prerelease date) for the song.
-//    static let releaseDate = SHMediaItemProperty("Release Date")
-//
-//    //The song’s number in the album’s track list.
-//    static let trackNumber = SHMediaItemProperty("Track Number")
-//}
-//
-//// Add a property for returning the MusicKit data using a subscript.
-//extension SHMediaItem {
-//    //The title of the album the song appears on.
-//    var albumTitle: String? {
-//        return (self[.albumTitle] as? String?)!
-//    }
-//
-//    //The song’s associated albums.
-//    var albums: MusicItemCollection<Album>? {
-//        return (self[.albums] as? MusicItemCollection<Album>?)!
-//    }
-//
-//    //The artist’s URL.
-//    var artistURL: URL? {
-//        return (self[.artistURL] as? URL?)!
-//    }
-//
-//    //The duration of the song.
-//    var duration: TimeInterval? {
-//        return (self[.duration] as? TimeInterval?)!
-//    }
-//
-//    //The names of the song’s associated genres.
-//    var genreNames: [String] {
-//        return (self[.genreNames] as? [String])!
-//    }
-//
-//    //The song’s associated genres.
-//    var genres: MusicItemCollection<Genre>? {
-//        return (self[.genres] as? MusicItemCollection<Genre>?)!
-//    }
-//
-//    //The release date (or expected prerelease date) for the song.
-//    var releaseDate: Date? {
-//        return (self[.releaseDate] as? Date?)!
-//    }
-//
-//    //The song’s number in the album’s track list.
-//    var trackNumber: Int? {
-//        return self[.trackNumber] as? Int
-//    }
-//}
-
-

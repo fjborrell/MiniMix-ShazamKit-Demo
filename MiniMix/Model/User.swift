@@ -9,7 +9,7 @@ import Foundation
 import ShazamKit
 
 class User: ObservableObject {
-    // Private reference to the singleton user
+    // Reference to the singleton user
     static let globalUser: User = User()
     @Published var shazamRequestHistory: [BinarySong]
     
