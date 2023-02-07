@@ -14,7 +14,7 @@ struct SongTileView: View {
     
     var body: some View {
         ZStack {
-            VStack(spacing: 10) {
+            VStack() {
                 AsyncImage(url: song?.shazamKitData.artworkURL) { image in
                     image.resizable()
                 } placeholder: {
@@ -22,9 +22,9 @@ struct SongTileView: View {
                         .progressViewStyle(.circular)
                         .colorInvert()
                 }
-                .frame(width: 200, height: 200)
+                .frame(width: 150, height: 150)
             }
-            .background(Color.miniBlue)
+            .background(Color.miniGrey)
             .cornerRadius(3)
             .shadow(color: .black, radius: 0, x: 6, y: 6)
             
@@ -35,10 +35,10 @@ struct SongTileView: View {
                     .foregroundColor(.white)
                     .padding(.horizontal, 30)
                     .padding(.vertical, 5)
-                    .frame(maxWidth: 200, maxHeight: 50)
+                    .frame(maxWidth: 150, maxHeight: 50)
             }
-            .background(Color.miniGrey)
-            .padding(.top, 150)
+            .background(Color.miniBlue)
+            .padding(.top, 100)
         }
     }
 }

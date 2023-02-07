@@ -97,11 +97,14 @@ struct SongView: View {
                                 Text(song?.shazamKitData.title ?? "Song Title")
                                     .font(.poppins(.bold, size: 35))
                                     .multilineTextAlignment(.center)
+                                    .padding(.horizontal, 10)
                                 
                                 Text(song?.shazamKitData.artist ?? "Artist")
                                     .font(.poppins(.bold, size: 20))
                                     .foregroundColor(.gray)
                                     .padding(.top, 8)
+                                    .padding(.horizontal, 10)
+                                    .multilineTextAlignment(.center)
                             }
                             .opacity(1 + (progress > 0 ? -progress : progress))
                             .padding(.bottom, 15)

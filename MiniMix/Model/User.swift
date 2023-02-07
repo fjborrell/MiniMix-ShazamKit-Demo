@@ -8,10 +8,10 @@
 import Foundation
 import ShazamKit
 
-class User {
+class User: ObservableObject {
     // Private reference to the singleton user
     static let globalUser: User = User()
-    private var shazamRequestHistory: [BinarySong]
+    @Published var shazamRequestHistory: [BinarySong]
     
     // Private constructor to ensure client can't create new Users (singleton)
     private init(shazamRequestHistory: [BinarySong] = []) {

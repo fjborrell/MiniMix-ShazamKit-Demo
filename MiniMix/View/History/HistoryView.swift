@@ -12,11 +12,9 @@ struct HistoryView: View {
     @Binding var shazamHelper: ShazamKitHelper?
     @Binding var songDetailsPresented: Bool
     @State var selectedSong: BinarySong? = nil
-    @State var songHistory = User.globalUser.getShazamRequestHistory()
+    @ObservedObject var user = User.globalUser
     
-    var items: [GridItem] {
-      Array(repeating: .init(.adaptive(minimum: 120)), count: 2)
-    }
+    var tiles: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         ZStack {
@@ -32,16 +30,17 @@ struct HistoryView: View {
                 
                 Spacer()
                 ScrollView(.vertical, showsIndicators: false) {
-                    ForEach(songHistory, id: \.id) { song in
-                        LazyVGrid(columns: items, spacing: 10) {
+                    LazyVGrid(columns: tiles, spacing: 20) {
+                        ForEach(user.getShazamRequestHistory().reversed(), id: \.id) { song in
                             SongTileView(song: song)
                                 .onTapGesture {
                                     selectedSong = song
                                     songDetailsPresented = true
                                 }
                         }
-                        .padding(.horizontal)                            
                     }
+                    .padding(.horizontal)
+                    
                 }
             }
             .sheet(isPresented: $songDetailsPresented) {
