@@ -16,6 +16,7 @@ struct ListenView: View {
     @State var isListening: Bool = false
     @State private var musicKitSongResponse: MySongResponse?
     @State var musicKitSong: Song?
+    @State var showingFailedMatchAlert: Bool = false
     
     
     var body: some View {
@@ -77,10 +78,13 @@ struct ListenView: View {
                 }
             }
         }
-        .onDisappear {
-            //Privacy double-down in case listening didn't stop after song was identified
-            shazamHelper?.stopListening()
-        }
+        .alert("Match Failed", isPresented: $showingFailedMatchAlert, actions: {
+            Button("Continue", role: .cancel, action: {
+                showingFailedMatchAlert = false
+            })
+        }, message: {
+            Text("Unfortunately a song could not be identified. Please try again.")
+        })
     }
     
     func finishedSongMatch(item: BinarySong?, error: Error?) {
@@ -95,6 +99,7 @@ struct ListenView: View {
             //handle error match
             print("DEBUG: Failed to find a song match -> \(error.debugDescription)")
             isListening = false
+            showingFailedMatchAlert = true
         }
     }
 }

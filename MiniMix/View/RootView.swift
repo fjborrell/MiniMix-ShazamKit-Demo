@@ -26,6 +26,7 @@ struct RootView: View {
                 }
                 .tag(1)
         }
+        .tint(.pink)
         .navigationBarBackButtonHidden(true)
     }
 }
