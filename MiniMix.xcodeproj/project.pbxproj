@@ -30,6 +30,8 @@
 		758FEC4929902CCD00E288F2 /* SongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758FEC4829902CCD00E288F2 /* SongView.swift */; };
 		758FEC5029905BA500E288F2 /* SongSizingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758FEC4F29905BA500E288F2 /* SongSizingView.swift */; };
 		758FEC522990708400E288F2 /* TrackDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758FEC512990708400E288F2 /* TrackDataView.swift */; };
+		75BC8A9C2992C3D30043D930 /* ButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC8A9B2992C3D30043D930 /* ButtonBuilder.swift */; };
+		75BC8A9F2992C4D40043D930 /* CoverArtBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC8A9E2992C4D40043D930 /* CoverArtBuilder.swift */; };
 		75BF63D8298DA4D200B7C668 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF63D7298DA4D200B7C668 /* Colors.swift */; };
 		75BF63DA298DA90B00B7C668 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF63D9298DA90B00B7C668 /* Styles.swift */; };
 		75BF63DC298DAE3A00B7C668 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF63DB298DAE3A00B7C668 /* Fonts.swift */; };
@@ -88,6 +90,8 @@
 		758FEC4829902CCD00E288F2 /* SongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongView.swift; sourceTree = "<group>"; };
 		758FEC4F29905BA500E288F2 /* SongSizingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSizingView.swift; sourceTree = "<group>"; };
 		758FEC512990708400E288F2 /* TrackDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDataView.swift; sourceTree = "<group>"; };
+		75BC8A9B2992C3D30043D930 /* ButtonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBuilder.swift; sourceTree = "<group>"; };
+		75BC8A9E2992C4D40043D930 /* CoverArtBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverArtBuilder.swift; sourceTree = "<group>"; };
 		75BF63D7298DA4D200B7C668 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		75BF63D9298DA90B00B7C668 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		75BF63DB298DAE3A00B7C668 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -211,11 +215,21 @@
 		758FEC4C29902DFD00E288F2 /* StickySongView */ = {
 			isa = PBXGroup;
 			children = (
-				755FDDB22992131900E86688 /* TrackData */,
 				758FEC4829902CCD00E288F2 /* SongView.swift */,
 				758FEC4F29905BA500E288F2 /* SongSizingView.swift */,
+				75BC8A9D2992C4A70043D930 /* View Builders */,
+				755FDDB22992131900E86688 /* TrackData */,
 			);
 			path = StickySongView;
+			sourceTree = "<group>";
+		};
+		75BC8A9D2992C4A70043D930 /* View Builders */ = {
+			isa = PBXGroup;
+			children = (
+				75BC8A9B2992C3D30043D930 /* ButtonBuilder.swift */,
+				75BC8A9E2992C4D40043D930 /* CoverArtBuilder.swift */,
+			);
+			path = "View Builders";
 			sourceTree = "<group>";
 		};
 		75BF63D3298DA01400B7C668 /* View */ = {
@@ -224,9 +238,9 @@
 				7549816F298F530400603931 /* RootView.swift */,
 				75127C7F298CCA6500F0FA0A /* WelcomeView.swift */,
 				75498161298EDC8500603931 /* ListenView.swift */,
+				7506D38E2991D6C30090928E /* SoundWaveView.swift */,
 				7506D38D2991B0EF0090928E /* History */,
 				758FEC4C29902DFD00E288F2 /* StickySongView */,
-				7506D38E2991D6C30090928E /* SoundWaveView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -411,8 +425,10 @@
 				75BF63DC298DAE3A00B7C668 /* Fonts.swift in Sources */,
 				758FEC4929902CCD00E288F2 /* SongView.swift in Sources */,
 				75127C7E298CCA6500F0FA0A /* MiniMixApp.swift in Sources */,
+				75BC8A9C2992C3D30043D930 /* ButtonBuilder.swift in Sources */,
 				755FDDBA2992141000E86688 /* MiscDataView.swift in Sources */,
 				75BF63DA298DA90B00B7C668 /* Styles.swift in Sources */,
+				75BC8A9F2992C4D40043D930 /* CoverArtBuilder.swift in Sources */,
 				756B9081299194CA0089D066 /* BinarySong.swift in Sources */,
 				7506D38C2991B0EC0090928E /* SongTileView.swift in Sources */,
 				7549816E298F514200603931 /* HistoryView.swift in Sources */,

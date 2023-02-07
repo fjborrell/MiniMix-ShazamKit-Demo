@@ -80,7 +80,7 @@ struct ListenView: View {
         }
         // A song's data sheet is presented only once a song has been matched and it's appropriate BinarySong data type has been created
         .sheet(isPresented: $isShowingSong) {
-            SongSizingView(song: $matchedSong, isShowingSong: $isShowingSong, shazamHelper: $shazamHelper)
+            SongSizingView(song: $matchedSong, shazamHelper: $shazamHelper, isShowingSong: $isShowingSong)
         }
         
         // Configures a ShazamKitHelper if one doesn't already exist

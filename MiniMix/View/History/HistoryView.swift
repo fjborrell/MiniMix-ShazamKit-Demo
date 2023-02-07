@@ -51,7 +51,7 @@ struct HistoryView: View {
             }
             // When a song in history is tapped, present a song data sheet with that specific track's data.
             .sheet(isPresented: $songDetailsPresented) {
-                SongSizingView(song: $selectedSong, isShowingSong: $songDetailsPresented, shazamHelper: $shazamHelper)
+                SongSizingView(song: $selectedSong, shazamHelper: $shazamHelper, isShowingSong: $songDetailsPresented)
             }
         }
     }

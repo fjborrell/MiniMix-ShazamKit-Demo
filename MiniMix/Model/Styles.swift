@@ -72,3 +72,17 @@ extension ButtonStyle where Self == NeoBrutalismRectButtonStyle {
 extension ButtonStyle where Self == NeoBrutalismCircleButtonStyle {
     static var neobrutalismCircle: Self { Self(color: .miniGrey) }
 }
+
+// Generates a gradient that changes with a given scroll factor (Used in SongView)
+@ViewBuilder
+func scrollGradient(progressDelta: Double) -> some View {
+    Rectangle()
+        .fill(
+            .linearGradient(colors: [
+                .black.opacity(0 - progressDelta),
+                .black.opacity(0.1 - progressDelta),
+                .black.opacity(0.4 - progressDelta),
+                .black.opacity(0.6 - progressDelta), .black
+            ], startPoint: .top, endPoint: .bottom)
+        )
+}

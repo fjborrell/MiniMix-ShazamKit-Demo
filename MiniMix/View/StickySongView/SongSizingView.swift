@@ -21,7 +21,7 @@ struct SongSizingView: View {
         GeometryReader {
             let safeArea = $0.safeAreaInsets
             let size = $0.size
-            SongView(song: $song, isShowingSong: $isShowingSong, shazamHelper: $shazamHelper, safeArea: safeArea, size: size)
+            SongView(song: $song, shazamHelper: $shazamHelper, safeArea: safeArea, size: size, isShowingSong: $isShowingSong)
                 .ignoresSafeArea(.container, edges: .top)
         }
         .preferredColorScheme(.dark)
