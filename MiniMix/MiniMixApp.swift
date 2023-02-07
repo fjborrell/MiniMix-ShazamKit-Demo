@@ -3,6 +3,8 @@
 //  MiniMix
 //
 //  Created by Fernando Borrell on 2/2/23.
+//  musicSession Asset Attribution: https://storyset.com
+//
 //
 
 import SwiftUI

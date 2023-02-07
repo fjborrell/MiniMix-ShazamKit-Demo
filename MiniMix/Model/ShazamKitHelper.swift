@@ -3,6 +3,12 @@
 //  MiniMix
 //
 //  Created by Fernando Borrell on 2/4/23.
+//  Helpful Sources and Documentation Consulted:
+//  - https://developer.apple.com/documentation/shazamkit
+//  - https://developer.apple.com/documentation/shazamkit/shsession/matching_audio_using_the_built-in_microphone
+//  - Explore ShazamKit - WWDC21 - Videos - Apple Developer
+//  - https://developer.apple.com/documentation/MusicKit/
+//  - https://developer.apple.com/documentation/applemusicapi/
 //
 
 import AVFAudio
@@ -10,18 +16,26 @@ import Foundation
 import ShazamKit
 import MusicKit
 
+// Helper class to handle all ShazamKit and track data interactions
 class ShazamKitHelper: NSObject, SHSessionDelegate {
-    private var musicKitSongResponse: MySongResponse?
+    
+    // Drivers for microphone audio capture
     private let audioEngine = AVAudioEngine()
     private let mixerNode = AVAudioMixerNode()
+    
+    // Stores whether user has authorized Apple Music access
     private var isAuthorizedForMusicKit: Bool = false
     
-    // The closure that will be called in the UI
+    // Stores response from Apple Music API
+    private var musicKitSongResponse: MySongResponse?
+    
+    // The closure (handler signature) that will be called in the UI
     private var matchHandler: ((BinarySong?, Error?) -> Void)?
     
     // The session for the active ShazamKit match request.
     private var session: SHSession? = nil
     
+    // Constructor -> takes handler function
     init(handler: ((BinarySong?, Error?) -> Void)?) {
         self.matchHandler = handler
     }
@@ -29,12 +43,14 @@ class ShazamKitHelper: NSObject, SHSessionDelegate {
     func match(catalog: SHCustomCatalog? = nil) throws {
         // Instantiate SHSession if one doesn't already exist
         if (session == nil) {
-            // Use custom catalog if defined
             if let catalog = catalog {
+                // Use custom catalog if defined
                 session = SHSession(catalog: catalog)
             } else {
+                // Use standard Shazam catalog
                 session = SHSession()
             }
+            
             session?.delegate = self
         }
         
@@ -48,7 +64,8 @@ class ShazamKitHelper: NSObject, SHSessionDelegate {
     }
     
     
-    //Call only on initliazation!
+    // Note to self: Call only on initliazation! Audio needes to be configured only once
+    // Configure audio captured from microphone into a Shazam-friendly format
     func configureAudioEngine() {
         // Get the native audio format of the engine's input bus.
         let inputFormat = audioEngine.inputNode.inputFormat(forBus: 0)
@@ -72,6 +89,7 @@ class ShazamKitHelper: NSObject, SHSessionDelegate {
         }
     }
     
+    // Start microphone audio capture
     func startListening() throws {
         // Throw an error if the audio engine is already running.
         guard !audioEngine.isRunning else { return }
@@ -85,6 +103,7 @@ class ShazamKitHelper: NSObject, SHSessionDelegate {
         }
     }
     
+    // Stop microphone audio capture
     func stopListening() {
         // Check if the audio engine is already recording.
         if audioEngine.isRunning {
@@ -92,17 +111,21 @@ class ShazamKitHelper: NSObject, SHSessionDelegate {
         }
     }
     
+    // Requests Apple Music access from user
     func requestMusicAuthorization() {
         Task {
             let authorizationStatus = await MusicAuthorization.request()
             if authorizationStatus == .authorized {
+                // User accepted permission.
                 isAuthorizedForMusicKit = true
             } else {
                 // User denied permission.
+                isAuthorizedForMusicKit = true
             }
         }
     }
     
+    // Session function -> Handles SUCCESSFUL song match
     func session(_ session: SHSession, didFind match: SHMatch) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {
@@ -110,11 +133,13 @@ class ShazamKitHelper: NSObject, SHSessionDelegate {
             }
             
             if let handler = self.matchHandler {
+                // Force un-wrapped since this session function is called only on a successful SHMatch return
                 let shazamKitData: SHMediaItem = match.mediaItems.first!
+                // MusicKit can have no associated data, thus BinarySong must handle Optional type
                 var musicKitData: Song? = nil
                 
                 
-                // Get Song data from MusicKit
+                // Use retrieved SHMediaItem to fetch associated MusicKit data
                 if self.isAuthorizedForMusicKit {
                     Task {
                         self.musicKitSongResponse = await shazamKitData.getMusicKitSong()
@@ -131,6 +156,7 @@ class ShazamKitHelper: NSObject, SHSessionDelegate {
         }
     }
     
+    // Session function -> Handles FAILURE song match
     func session(_ session: SHSession, didNotFindMatchFor signature: SHSignature, error: Error?) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {
@@ -144,22 +170,25 @@ class ShazamKitHelper: NSObject, SHSessionDelegate {
         }
     }
     
+    // Adds the list of SHMediaItem (Shazam Tracks) to the user's personal Shazam Library
     public func addToShazamLibrary(songs: [SHMediaItem]) {
-      SHMediaLibrary.default.add(songs) { error in
-        if let error = error {
-            print(error.localizedDescription.debugDescription)
-        } else {
-          print("DEBUG: Added to Shazam Library")
+        SHMediaLibrary.default.add(songs) { error in
+            if let error = error {
+                print(error.localizedDescription.debugDescription)
+            } else {
+                print("DEBUG: Added to Shazam Library")
+            }
         }
-      }
     }
 }
 
+// Custom data type that is able to store an Apple Music API Response
 struct MySongResponse: Decodable {
     let data: [Song?]
 }
 
 extension SHMediaItem {
+    // RESTful API Request to Apple Music API using associated SHMediaItem's (self) Apple Music ID.
     func getMusicKitSong() async -> MySongResponse {
         do {
             let countryCode = try await MusicDataRequest.currentCountryCode
@@ -168,10 +197,10 @@ extension SHMediaItem {
                 return MySongResponse(data: [nil])
             }
             let url = URL(string: "https://api.music.apple.com/v1/catalog/\(countryCode)/songs/\(songID)")!
-
+            
             let dataRequest = MusicDataRequest(urlRequest: URLRequest(url: url))
             let dataResponse = try await dataRequest.response()
-
+            
             let decoder = JSONDecoder()
             let songResponse = try decoder.decode(MySongResponse.self, from: dataResponse.data)
             return songResponse
