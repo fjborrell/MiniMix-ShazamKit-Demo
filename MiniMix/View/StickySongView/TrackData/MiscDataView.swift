@@ -18,6 +18,11 @@ struct MiscDataView: View {
         
         VStack (alignment: .center, spacing: 15) {
             
+            // MARK: MUSIC VIDEO (via Apple Music)
+            Link("Music Video", destination: (song?.shazamKitData.videoURL ?? URL(string: "https://music.apple.com/us/browse"))!)
+                .font(.poppins(.bold, size: 15))
+                .foregroundColor(.blue)
+            
             // MARK: INTERNATIONAL STANDARD RECORDING CODE
             HStack {
                 Text("ISRC: ")
@@ -49,12 +54,6 @@ struct MiscDataView: View {
             
             
             // MARK: EXTRA TRACK INFORMATION
-
-            // Music Video (via Apple Music)
-            Link("Music Video", destination: (song?.shazamKitData.videoURL ?? URL(string: "https://music.apple.com/us/browse"))!)
-                .font(.poppins(.bold, size: 15))
-                .foregroundColor(.blue)
-            
             if song?.musicKitData != nil {
                 // Track Duration
                 HStack {

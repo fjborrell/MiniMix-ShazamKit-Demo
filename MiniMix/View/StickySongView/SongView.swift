@@ -10,9 +10,10 @@ import ShazamKit
 import MusicKit
 
 struct SongView: View {
+    @State var addedSongToLibrary: Bool = false
+    
     @Binding var song: BinarySong?
     @Binding var isShowingSong: Bool
-    @State var addedSongToLibrary: Bool = false
     @Binding var shazamHelper: ShazamKitHelper?
     
     var safeArea: EdgeInsets

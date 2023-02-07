@@ -10,12 +10,14 @@ import ShazamKit
 import MusicKit
 
 struct ListenView: View {
-    @Binding var shazamHelper: ShazamKitHelper?
+    
     @State var matchedSong: BinarySong?
-    @Binding var isShowingSong: Bool
     @State var isListening: Bool = false
     @State var showingFailedMatchAlert: Bool = false
     @State var isSoundWavesAnimated: Bool = false
+    
+    @Binding var shazamHelper: ShazamKitHelper?
+    @Binding var isShowingSong: Bool
     
     var body: some View {
         ZStack {

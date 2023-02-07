@@ -10,9 +10,9 @@ import ShazamKit
 
 struct HistoryView: View {    
     @State var selectedSong: BinarySong? = nil
+    @State var songDetailsPresented: Bool = false
     
     @Binding var shazamHelper: ShazamKitHelper?
-    @State var songDetailsPresented: Bool = false
     
     @ObservedObject var userData = User.globalUser
     
