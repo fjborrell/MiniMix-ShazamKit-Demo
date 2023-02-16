@@ -1,8 +1,15 @@
 # MiniMix (ShazamKit Demo)
+<p align="center", float="center">
+  <img src="/Resources/logo.png" alt="Logo" title="MiniMixLogo"/>
+</p>
 
 ## Vision, Description, and Features
 
 MiniMix is a song-identification iOS application. It listens to your surroundings, and uses ShazamKit to return any identified tracks as well as detailed information about that song.
+
+<p align="center", float="center">
+<img src="/Resources/icon.png" alt="Icon" title="AppIcon" width="100" height="100" />
+</p>
 
 **Prototype & Key Features:**
 
@@ -18,6 +25,8 @@ This MVP/prototype was developed in ~4 days, and leverages Apple’s ShazamKit a
 
 * A user can view their song request history
 
+<img src="/Resources/overview.png" alt="Overview" title="Features" width="400" height="300"/>
+
 ## Getting Started
 
 ### Requirements
@@ -30,6 +39,8 @@ This app was developed with the following environment in mind:
 2. App requests access to Apple Music catalog for detailed track data
 
 ## Frameworks
+<img src="/Resources/techdetails.png" alt="TechDetails" title="TechDetails" width="700" height="200"/>
+
 * [SwiftUI](https://developer.apple.com/documentation/swiftui/)
 * [ShazamKit](https://developer.apple.com/documentation/shazamkit)
 * [MusicKit](https://developer.apple.com/documentation/MusicKit)
